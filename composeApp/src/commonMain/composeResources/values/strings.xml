@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Expense Monitor</string>
+    <!-- bottom bar-->
+    <string name="home">Home</string>
+    <string name="transactions">Transactions</string>
+    <string name="chart">Chart</string>
+    <string name="more">More</string>
+    <!-- more screen -->
+    <string name="movements">Movements</string>
+    <string name="security">Security</string>
+    <string name="calendar">calendar</string>
+    <string name="goal">Goal</string>
+    <string name="expenses_income">Expenses and Income</string>
+    <string name="accounts">Accounts</string>
+    <string name="persons">Persons</string>
+    <string name="pin">Pin</string>
+    <string name="biometric">Biometric</string>
+    <string name="face_id">Face ID</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="feedback">Feedback</string>
+    <!-- messages -->
+    <string name="confirm_exit">Confirm Exit</string>
+    <string name="confirm_exit_message">Are you sure you want to go back?</string>
+    <!-- options -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

@@ -1,0 +1,22 @@
+CREATE TABLE currency_types (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL,
+    created_at TEXT NOT NULL
+);
+
+getAllCurrencyTypes:
+SELECT * FROM currency_types;
+
+insertCurrencyType:
+INSERT INTO
+    currency_types(name, created_at)
+VALUES
+    (?, ?);
+
+updateCurrencyType:
+UPDATE
+    currency_types
+SET
+    name = ?
+WHERE
+    id = ?;
