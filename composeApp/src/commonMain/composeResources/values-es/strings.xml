@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Expense Monitor</string>
+    <!--  welcome screens  -->
+    <string name="bankInfoWelcome">Podras crear todas las cuentas que necesites del banco que necesites.</string>
+    <string name="reportInfoWelcome">Lleva un registro de tus gastos e ingresos.\nTambien podras obtener graficos para poder analizarlos.</string>
+    <string name="categoryInfoWelcome">Categorizar tus gastos para llevar un control mas detallado y organizado.</string>
+    <!-- configs -->
+    <string name="mainCurrency">Seleccione la moneda principal</string>
+    <string name="selectCurrency">Seleccionar moneda</string>
     <!-- bottom bar-->
     <string name="home">Inicio</string>
     <string name="transactions">Transacciones</string>

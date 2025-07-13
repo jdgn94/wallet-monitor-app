@@ -1,6 +1,6 @@
 [versions]
-agp = "8.10.1"
-android-compileSdk = "35"
+agp = "8.11.0"
+android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
 androidx-activity = "1.10.1"
@@ -8,23 +8,24 @@ androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
 androidx-core = "1.16.0"
 androidx-espresso = "3.6.1"
-androidx-lifecycle = "2.9.0"
+androidx-lifecycle = "2.9.1"
 androidx-testExt = "1.2.1"
-composeMultiplatform = "1.8.1"
+composeMultiplatform = "1.9.0-alpha03"
 junit = "4.13.2"
-kotlin = "2.1.21"
+kotlin = "2.2.0"
+compose = "1.6.10"
 
-navigation-compose = "2.9.0-beta01"
-koin = "4.0.4"
+navigation-compose = "2.9.0-beta03"
+koin = "4.1.0"
 livecycle-viewmodel = "2.9.1"
-kotlinStdlib = "2.1.21"
+kotlinStdlib = "2.2.0"
 runner = "1.6.2"
 core = "1.6.1"
 ktor = "3.1.3"
 datastore = "1.1.7"
 sqldelight = "2.1.0"
-settings = "1.2.0"
-datetime = "0.6.1"
+settings = "1.3.0"
+datetime = "0.7.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -60,6 +61,7 @@ datastore = { module = "androidx.datastore:datastore", version.ref = "datastore"
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
@@ -74,6 +76,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+composeResources = { id = "org.jetbrains.compose.resources", version.ref = "compose" }
 
 [bundles]
 ktor = [

@@ -5,6 +5,6 @@ import io.ktor.client.engine.HttpClientEngine
 expect val httpClientNative: HttpClientEngine
 
 object Constants {
-    const val baseApiUrl = "http://localhost:8000/api"
+    const val apiUrl = "http://192.168.1.28:8000/api"
     val httpClient = httpClientNative
 }

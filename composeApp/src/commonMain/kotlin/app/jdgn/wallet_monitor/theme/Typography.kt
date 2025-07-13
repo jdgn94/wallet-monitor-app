@@ -1,4 +1,4 @@
-package app.jdgn.wallet_monitor.ui.theme
+package app.jdgn.wallet_monitor.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package utils
+package app.wallet_monitor.shared.utils
 
 enum class NetworkError : Error {
     REQUEST_TIMEOUT,

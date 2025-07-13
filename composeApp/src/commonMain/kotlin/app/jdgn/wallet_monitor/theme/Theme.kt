@@ -1,4 +1,4 @@
-package app.jdgn.wallet_monitor.ui.theme
+package app.jdgn.wallet_monitor.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

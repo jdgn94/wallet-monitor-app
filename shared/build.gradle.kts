@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.sqlDelight)
 }
@@ -59,8 +61,10 @@ kotlin {
     // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         commonMain {
+            resources.srcDir("src/commonMain/resources")
             dependencies {
                 implementation(libs.kotlin.stdlib)
+                implementation(compose.components.resources)
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.compose.viewmodel)
@@ -69,6 +73,7 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.multiplatform.settings)
                 implementation(libs.multiplatform.settings.no.arg)
+                implementation(libs.sqldelight.coroutines)
 
                 api(libs.koin.compose)
                 api(libs.koin.core)
@@ -111,7 +116,10 @@ kotlin {
 sqldelight {
     databases {
         create("WalletMonitorDB") {
-            packageName.set("app.wallet_monitor.db")
+            packageName ="app.wallet_monitor.db"
+            version = 0
+            schemaOutputDirectory = file("src/commonMain/sqldelight/app/wallet_monitor/db/schemas")
+            verifyMigrations = true
         }
     }
 }

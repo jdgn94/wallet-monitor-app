@@ -12,8 +12,8 @@ import io.ktor.http.contentType
 import io.ktor.http.parameters
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.serialization.SerializationException
-import utils.NetworkError
-import utils.Result
+import app.wallet_monitor.shared.utils.NetworkError
+import app.wallet_monitor.shared.utils.Result
 
 class HttpController{
     private val httpClient: HttpClient = createHttpClient(Constants.httpClient)
@@ -22,7 +22,7 @@ class HttpController{
         url: String,
         params: ParametersBuilder.() -> Unit = {}
     ): Result<String, NetworkError> {
-        val urlString = Constants.baseApiUrl + url
+        val urlString = Constants.apiUrl + url
         println("url: $urlString")
         val response = try {
             httpClient.get(
@@ -58,7 +58,7 @@ class HttpController{
         params: ParametersBuilder.() -> Unit = {},
         body: Any? = null,
     ): Result<String, NetworkError> {
-        val urlString = Constants.baseApiUrl + url
+        val urlString = Constants.apiUrl + url
         println("url: $urlString")
         val response = try {
             httpClient.post(

@@ -1,7 +1,8 @@
 package app.wallet_monitor.shared
 
+import app.wallet_monitor.db.WalletMonitorDB
+import app.wallet_monitor.shared.repository.DataInitializer
 import app.wallet_monitor.shared.viewModel.MainViewModel
-import app.wallet_monitor.shared.viewModel.TestingViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
@@ -12,23 +13,29 @@ import org.koin.dsl.module
 val appModules = appModule
 
 val dataModules = module {
+    single(createdAtStart = true) { DataInitializer() }
 }
 
 val viewModelModules = module {
     if (currentPlatform == Platform.ANDROID) {
-        factoryOf(::MainViewModel)
-        factoryOf(::TestingViewModel)
+//        factoryOf(::MainViewModel)
     } else {
-        singleOf(::MainViewModel)
-        singleOf(::TestingViewModel)
+//        singleOf(::MainViewModel)
     }
 }
 
 expect val nativeModules: Module
 
+val databaseModules = module {
+    single { WalletMonitorDB(get()) }
+    single { get<WalletMonitorDB>().currencyTypeQueries }
+    single { get<WalletMonitorDB>().currencyQueries }
+    single { get<WalletMonitorDB>().exchangeRateQueries }
+}
+
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
         config?.invoke(this)
-        modules(appModules, dataModules, viewModelModules, nativeModules)
+        modules(appModules, nativeModules, databaseModules, dataModules, viewModelModules)
     }
 }

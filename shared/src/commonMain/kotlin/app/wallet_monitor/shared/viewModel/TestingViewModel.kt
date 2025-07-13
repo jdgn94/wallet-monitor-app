@@ -2,8 +2,8 @@ package app.wallet_monitor.shared.viewModel
 
 import androidx.lifecycle.ViewModel
 import app.wallet_monitor.shared.networking.HttpController
-import utils.onError
-import utils.onSuccess
+import app.wallet_monitor.shared.utils.onError
+import app.wallet_monitor.shared.utils.onSuccess
 
 class TestingViewModel: ViewModel() {
     private val httpController: HttpController = HttpController()

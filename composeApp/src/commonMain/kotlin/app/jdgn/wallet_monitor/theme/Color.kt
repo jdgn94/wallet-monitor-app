@@ -1,4 +1,4 @@
-package app.jdgn.wallet_monitor.ui.theme
+package app.jdgn.wallet_monitor.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF69548D)
