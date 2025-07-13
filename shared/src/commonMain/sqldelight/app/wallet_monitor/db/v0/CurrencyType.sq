@@ -1,0 +1,28 @@
+CREATE TABLE currencyTypes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL,
+    createdAt TEXT NOT NULL
+);
+
+getAll:
+SELECT * FROM currencyTypes;
+
+getOneById:
+SELECT * FROM currencyTypes WHERE id = ?;
+
+getOneByName:
+SELECT * FROM currencyTypes WHERE name = ?;
+
+insert:
+INSERT INTO
+    currencyTypes(name, createdAt)
+VALUES
+    (?, ?);
+
+update:
+UPDATE
+    currencyTypes
+SET
+    name = ?
+WHERE
+    id = ?;

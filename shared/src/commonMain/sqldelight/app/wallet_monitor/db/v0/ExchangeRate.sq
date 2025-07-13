@@ -1,0 +1,29 @@
+CREATE TABLE exchangeRates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    currencyId INTEGER UNIQUE NOT NULL,
+    exchangeRate REAL NOT NULL,
+    createdAt TEXT NOT NULL,
+    updatedAt TEXT NOT NULL,
+    FOREIGN KEY (currencyId) REFERENCES currencies(id) ON DELETE CASCADE
+);
+
+getAll:
+SELECT * FROM exchangeRates;
+
+getOne:
+SELECT * FROM exchangeRates WHERE id = ?;
+
+insert:
+INSERT INTO
+    exchangeRates(currencyId, exchangeRate, createdAt, updatedAt)
+VALUES
+    (?, ?, ?, ?);
+
+update:
+UPDATE
+    exchangeRates
+SET
+    exchangeRate = ?,
+    updatedAt = ?
+WHERE
+    currencyId = ?;

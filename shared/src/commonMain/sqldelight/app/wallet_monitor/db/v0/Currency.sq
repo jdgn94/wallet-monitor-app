@@ -1,0 +1,80 @@
+CREATE TABLE currencies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    symbol TEXT NOT NULL,
+    symbolNative TEXT NOT NULL,
+    code TEXT NOT NULL UNIQUE,
+    decimalDigits INTEGER NOT NULL,
+    rounding INTEGER NOT NULL,
+    currencyTypeId INTEGER NOT NULL,
+    countries TEXT DEFAULT NULL,
+    FOREIGN KEY (currencyTypeId) REFERENCES currencyTypes(id) ON DELETE CASCADE
+);
+
+all:
+SELECT * FROM currencies;
+
+insert:
+INSERT INTO
+    currencies(name, symbol, symbolNative, code, decimalDigits, rounding, currencyTypeId, countries)
+VALUES
+    (?, ?, ?, ?, ?, ?, ?, ?);
+
+update:
+UPDATE
+    currencies
+SET
+    name = ?,
+    symbol = ?,
+    symbolNative = ?,
+    code = ?,
+    decimalDigits = ?,
+    rounding = ?,
+    currencyTypeId = ?,
+    countries = ?
+WHERE
+    id = ?;
+
+getAllWithTypeAndRate:
+SELECT
+    c.id,
+    c.name,
+    c.symbol,
+    c.symbolNative,
+    c.code,
+    c.decimalDigits,
+    c.rounding,
+    c.countries,
+    ct.id typeId,
+    ct.name typeName,
+    er.exchangeRate
+FROM
+    currencies c
+    INNER JOIN currencyTypes ct ON c.currencyTypeId = ct.id
+    LEFT JOIN exchangeRates er ON er.currencyId = c.id;
+
+getOneWithTypeAndRate:
+SELECT
+    c.id,
+    c.name,
+    c.symbol,
+    c.symbolNative,
+    c.code,
+    c.decimalDigits,
+    c.rounding,
+    c.countries,
+    ct.id typeId,
+    ct.name typeName,
+    er.exchangeRate
+FROM
+    currencies c
+    INNER JOIN currencyTypes ct ON c.currencyTypeId = ct.id
+    LEFT JOIN exchangeRates er ON er.currencyId = c.id
+WHERE
+    c.id = ?;
+
+getOneByCode:
+SELECT * FROM currencies WHERE code = ?;
+
+getOneByName:
+SELECT * FROM currencies WHERE name = ?;

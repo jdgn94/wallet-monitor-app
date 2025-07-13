@@ -14,8 +14,9 @@ import androidx.compose.ui.platform.LocalContext
 
 @Immutable
 data class ExtendedColorScheme(
-    val success: ColorFamily,
+    val info: ColorFamily,
     val warning: ColorFamily,
+    val success: ColorFamily,
 )
 
 private val lightScheme = lightColorScheme(
@@ -247,11 +248,11 @@ private val highContrastDarkColorScheme = darkColorScheme(
 )
 
 val extendedLight = ExtendedColorScheme(
-    success = ColorFamily(
-        successLight,
-        onSuccessLight,
-        successContainerLight,
-        onSuccessContainerLight,
+    info = ColorFamily(
+        infoLight,
+        onInfoLight,
+        infoContainerLight,
+        onInfoContainerLight,
     ),
     warning = ColorFamily(
         warningLight,
@@ -259,14 +260,20 @@ val extendedLight = ExtendedColorScheme(
         warningContainerLight,
         onWarningContainerLight,
     ),
+    success = ColorFamily(
+        successLight,
+        onSuccessLight,
+        successContainerLight,
+        onSuccessContainerLight,
+    ),
 )
 
 val extendedDark = ExtendedColorScheme(
-    success = ColorFamily(
-        successDark,
-        onSuccessDark,
-        successContainerDark,
-        onSuccessContainerDark,
+    info = ColorFamily(
+        infoDark,
+        onInfoDark,
+        infoContainerDark,
+        onInfoContainerDark,
     ),
     warning = ColorFamily(
         warningDark,
@@ -274,14 +281,20 @@ val extendedDark = ExtendedColorScheme(
         warningContainerDark,
         onWarningContainerDark,
     ),
+    success = ColorFamily(
+        successDark,
+        onSuccessDark,
+        successContainerDark,
+        onSuccessContainerDark,
+    ),
 )
 
 val extendedLightMediumContrast = ExtendedColorScheme(
-    success = ColorFamily(
-        successLightMediumContrast,
-        onSuccessLightMediumContrast,
-        successContainerLightMediumContrast,
-        onSuccessContainerLightMediumContrast,
+    info = ColorFamily(
+        infoLightMediumContrast,
+        onInfoLightMediumContrast,
+        infoContainerLightMediumContrast,
+        onInfoContainerLightMediumContrast,
     ),
     warning = ColorFamily(
         warningLightMediumContrast,
@@ -289,14 +302,20 @@ val extendedLightMediumContrast = ExtendedColorScheme(
         warningContainerLightMediumContrast,
         onWarningContainerLightMediumContrast,
     ),
+    success = ColorFamily(
+        successLightMediumContrast,
+        onSuccessLightMediumContrast,
+        successContainerLightMediumContrast,
+        onSuccessContainerLightMediumContrast,
+    ),
 )
 
 val extendedLightHighContrast = ExtendedColorScheme(
-    success = ColorFamily(
-        successLightHighContrast,
-        onSuccessLightHighContrast,
-        successContainerLightHighContrast,
-        onSuccessContainerLightHighContrast,
+    info = ColorFamily(
+        infoLightHighContrast,
+        onInfoLightHighContrast,
+        infoContainerLightHighContrast,
+        onInfoContainerLightHighContrast,
     ),
     warning = ColorFamily(
         warningLightHighContrast,
@@ -304,14 +323,20 @@ val extendedLightHighContrast = ExtendedColorScheme(
         warningContainerLightHighContrast,
         onWarningContainerLightHighContrast,
     ),
+    success = ColorFamily(
+        successLightHighContrast,
+        onSuccessLightHighContrast,
+        successContainerLightHighContrast,
+        onSuccessContainerLightHighContrast,
+    ),
 )
 
 val extendedDarkMediumContrast = ExtendedColorScheme(
-    success = ColorFamily(
-        successDarkMediumContrast,
-        onSuccessDarkMediumContrast,
-        successContainerDarkMediumContrast,
-        onSuccessContainerDarkMediumContrast,
+    info = ColorFamily(
+        infoDarkMediumContrast,
+        onInfoDarkMediumContrast,
+        infoContainerDarkMediumContrast,
+        onInfoContainerDarkMediumContrast,
     ),
     warning = ColorFamily(
         warningDarkMediumContrast,
@@ -319,20 +344,32 @@ val extendedDarkMediumContrast = ExtendedColorScheme(
         warningContainerDarkMediumContrast,
         onWarningContainerDarkMediumContrast,
     ),
+    success = ColorFamily(
+        successDarkMediumContrast,
+        onSuccessDarkMediumContrast,
+        successContainerDarkMediumContrast,
+        onSuccessContainerDarkMediumContrast,
+    ),
 )
 
 val extendedDarkHighContrast = ExtendedColorScheme(
-    success = ColorFamily(
-        successDarkHighContrast,
-        onSuccessDarkHighContrast,
-        successContainerDarkHighContrast,
-        onSuccessContainerDarkHighContrast,
+    info = ColorFamily(
+        infoDarkHighContrast,
+        onInfoDarkHighContrast,
+        infoContainerDarkHighContrast,
+        onInfoContainerDarkHighContrast,
     ),
     warning = ColorFamily(
         warningDarkHighContrast,
         onWarningDarkHighContrast,
         warningContainerDarkHighContrast,
         onWarningContainerDarkHighContrast,
+    ),
+    success = ColorFamily(
+        successDarkHighContrast,
+        onSuccessDarkHighContrast,
+        successContainerDarkHighContrast,
+        onSuccessContainerDarkHighContrast,
     ),
 )
 
@@ -367,7 +404,7 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AppTypography(),
+        typography = appTypography(),
         content = content
     )
 }
