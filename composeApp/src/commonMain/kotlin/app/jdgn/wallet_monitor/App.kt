@@ -21,7 +21,7 @@ fun App(
 
     AppTheme(
         darkTheme = userPreferences.getBoolean("dark_mode").collectAsState(false).value,
-        dynamicColor = userPreferences.getBoolean("dynamic_color").collectAsState(false).value,
+//        dynamicColor = userPreferences.getBoolean("dynamic_color").collectAsState(false).value,
     ) {
 //        testingPage()
         Navigation()

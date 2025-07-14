@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
+import app.jdgn.wallet_monitor.getScreenWidth
 
 @Composable
 fun CustomBox(
@@ -31,7 +31,7 @@ fun CustomBox(
     content: @Composable BoxScope.() -> Unit
 ) {
     // Get screen width
-    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val screenWidth = getScreenWidth()
 
     // Calculate width 50%
     val boxWidth = (screenWidth * widthFraction).coerceAtMost(maxWidthDp)
