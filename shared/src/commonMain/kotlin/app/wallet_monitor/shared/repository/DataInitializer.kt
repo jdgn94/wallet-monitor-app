@@ -14,8 +14,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import app.wallet_monitor.shared.utils.onError
 import app.wallet_monitor.shared.utils.onSuccess
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 @Suppress("UNCHECKED_CAST")
 class DataInitializer: KoinComponent {
@@ -34,13 +32,13 @@ class DataInitializer: KoinComponent {
     }
 
     private suspend fun seedIfNeeded() {
-        println("Initialazing database")
+        println("Init database")
         val types = currencyTypes.getAll().executeAsList()
         println("types on db: $types")
-//        if (types.count() == 0) {
+        if (types.count() == 0) {
             println("need insert seeds")
             getInitialData()
-//        }
+        }
     }
 
     private suspend fun getInitialData() {

@@ -9,6 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import app.wallet_monitor.shared.UserPreferences
 import app.wallet_monitor.shared.dataStore
+import app.wallet_monitor.shared.initKoin
+import org.koin.android.ext.koin.androidContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

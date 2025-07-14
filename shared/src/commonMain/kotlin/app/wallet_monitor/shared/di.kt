@@ -2,11 +2,12 @@ package app.wallet_monitor.shared
 
 import app.wallet_monitor.db.WalletMonitorDB
 import app.wallet_monitor.shared.repository.DataInitializer
-import app.wallet_monitor.shared.viewModel.MainViewModel
+import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
@@ -18,9 +19,9 @@ val dataModules = module {
 
 val viewModelModules = module {
     if (currentPlatform == Platform.ANDROID) {
-//        factoryOf(::MainViewModel)
+        viewModelOf(::CurrencyViewModel)
     } else {
-//        singleOf(::MainViewModel)
+        singleOf(::CurrencyViewModel)
     }
 }
 
