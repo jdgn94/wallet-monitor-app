@@ -78,3 +78,11 @@ SELECT * FROM currencies WHERE code = ?;
 
 getOneByName:
 SELECT * FROM currencies WHERE name = ?;
+
+getAllByType:
+SELECT
+    *
+FROM
+    currencies
+WHERE
+    currencyTypeId = ?;

@@ -18,7 +18,8 @@ class CurrencyViewModel(
         if (!_currencies.isEmpty())
             return _currencies
 
-        _currencies = currencyQueries.all().executeAsList()
+        currencyQueries.getAllByType(currencyTypeId = 1.toLong()).executeAsList()
+            .also { _currencies = it }
         return _currencies
     }
 }

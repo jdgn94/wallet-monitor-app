@@ -1,6 +1,7 @@
 package app.jdgn.wallet_monitor.ui.components.basic
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -23,8 +24,10 @@ import app.jdgn.wallet_monitor.getScreenWidth
 @Composable
 fun CustomBox(
     modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(16.dp),
     margin: PaddingValues = PaddingValues(),
     color: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color? = null,
     onClick: (() -> Unit)? = null,
     widthFraction: Float = 0.5f,
     maxWidthDp: Dp = 300.dp,
@@ -62,8 +65,9 @@ fun CustomBox(
         ) {
             Box(
                 modifier = modifier
+                    .background(backgroundColor?.copy(alpha = 0.2f) ?: MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(padding),
                 content = content
             )
         }
