@@ -26,6 +26,6 @@ fun SetDefaultCurrency() {
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold
         )
-        SelectCurrencyComponent()
+        SelectCurrencyComponent(defaultCurrencySelectId = 149.toLong())
     }
 }

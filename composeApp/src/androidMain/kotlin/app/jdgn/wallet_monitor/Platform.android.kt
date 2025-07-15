@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.hardware.display.DisplayManager
 import android.view.Display
+import android.widget.Toast
 
 actual val currentPlatform = Platform.ANDROID
 
@@ -24,6 +25,18 @@ actual fun getScreenWidth(): Dp {
 actual fun getScreenHeight(): Dp {
     val configuration = LocalConfiguration.current
     return configuration.screenHeightDp.dp
+}
+
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class ToastManager(private val context: Context) {
+    actual fun showToast(message: String, duration: ToastDuration) {
+        val toastDuration = when (duration) {
+            ToastDuration.SHORT -> Toast.LENGTH_SHORT
+            ToastDuration.LONG -> Toast.LENGTH_LONG
+        }
+
+        Toast.makeText(context, message, toastDuration).show()
+    }
 }
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")

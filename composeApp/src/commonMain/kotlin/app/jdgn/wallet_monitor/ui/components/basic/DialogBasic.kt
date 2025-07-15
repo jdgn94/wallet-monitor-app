@@ -6,22 +6,25 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -30,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import app.jdgn.wallet_monitor.getScreenHeight
 import app.jdgn.wallet_monitor.getScreenWidth
-import app.jdgn.wallet_monitor.OrientationManager
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -38,14 +40,26 @@ import org.jetbrains.compose.resources.stringResource
 fun DialogBasic(
     open: Boolean,
     onDismissRequest: (() -> Unit),
+    searchAction: ((String) -> Unit)? = null,
     title: StringResource,
     body: @Composable (() -> Unit)
 ) {
     val scrollState = rememberScrollState()
+    val maxWidth = getScreenWidth() * 0.8f
+    val maxHeight = getScreenHeight() * 0.7f
+
     if (open) {
         BoxWithConstraints{
-            val maxWidth = getScreenWidth() * 0.8f
-            val maxHeight = getScreenHeight() * 0.7f
+            var searchText by remember { mutableStateOf("") }
+            val searchActive = remember { mutableStateOf(false) }
+
+            fun changeSearchState() {
+                searchActive.value = !searchActive.value
+            }
+
+            fun setSearchText(text:String) {
+                searchText = text
+            }
 
             Dialog(onDismissRequest = { onDismissRequest() }) {
                 Surface(
@@ -59,8 +73,33 @@ fun DialogBasic(
                         modifier = Modifier.padding(16.dp)
                     ) {
                         // title
-                        Text(text = stringResource(title), style = MaterialTheme.typography.headlineSmall)
-                        Box() {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (searchActive.value)
+                                TextField(
+                                    value = searchText,
+                                    onValueChange = { setSearchText(it) },
+                                    label = { Text("Search") },
+                                    singleLine = true,
+                                )
+                            else
+                                Text(
+                                    text = stringResource(title),
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            if (searchAction != null) {
+                                TextButton(onClick = { changeSearchState() }) {
+                                    if (searchActive.value)
+                                        Text(text = "Cancel")
+                                    else
+                                        Text(text = "Search")
+                                }
+                            }
+                        }
+                        Box {
                             FlowRow(
                                 modifier = Modifier
                                     .verticalScroll(scrollState)

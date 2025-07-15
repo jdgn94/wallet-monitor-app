@@ -14,6 +14,16 @@ import platform.UIKit.UIDeviceOrientationDidChangeNotification
 import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSOperationQueue
 import platform.darwin.NSObject
+import platform.UIKit.UIAlertController
+import platform.UIKit.UIAlertControllerStyleAlert
+import platform.UIKit.UIApplication
+import platform.UIKit.UIViewController
+import platform.UIKit.UIWindow
+import kotlinx.cinterop.ObjCAction
+import platform.Foundation.NSTimer
+import platform.Foundation.NSRunLoop
+import platform.Foundation.NSDefaultRunLoopMode
+import platform.Foundation.NSDate
 
 actual val currentPlatform = Platform.IOS
 
@@ -32,6 +42,35 @@ actual fun getScreenHeight(): Dp {
     return remember {
         val screen = UIScreen.mainScreen
         CGRectGetHeight(screen.bounds).toFloat().dp
+    }
+}
+
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class ToastManager {
+    actual fun showToast(message: String, duration: ToastDuration) {
+        val durationSeconds = when (duration) {
+            ToastDuration.SHORT -> 2.0
+            ToastDuration.LONG -> 3.5
+        }
+
+        val rootViewController = UIApplication.sharedApplication.keyWindow?.rootViewController
+            ?: return
+
+        val alert = UIAlertController.alertControllerWithTitle(
+            title = null,
+            message = message,
+            preferredStyle = UIAlertControllerStyleAlert
+        )
+
+        rootViewController.presentViewController(alert, animated = true, completion = null)
+
+        NSTimer.scheduledTimerWithTimeInterval(
+            durationSeconds,
+            false,
+            { NSTimer ->
+                alert.dismissViewControllerAnimated(true, completion = null)
+            }
+        )
     }
 }
 

@@ -73,6 +73,9 @@ FROM
 WHERE
     c.id = ?;
 
+getOneById:
+SELECT * FROM currencies WHERE id = ?;
+
 getOneByCode:
 SELECT * FROM currencies WHERE code = ?;
 
@@ -86,3 +89,12 @@ FROM
     currencies
 WHERE
     currencyTypeId = ?;
+
+getAllByNameAndType:
+SELECT
+    *
+FROM
+    currencies
+WHERE
+    (name = ? OR symbol = ? OR code = ? OR symbolNative = ?)
+    AND currencyTypeId IN (?);

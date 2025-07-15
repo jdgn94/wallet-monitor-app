@@ -14,12 +14,33 @@ class CurrencyViewModel(
 ): ViewModel() {
     private var _currencies: List<Currencies> = listOf()
 
-    suspend fun getCurrencies(): List<Currencies> {
+    fun getCurrencies(): List<Currencies> {
         if (!_currencies.isEmpty())
             return _currencies
 
         currencyQueries.getAllByType(currencyTypeId = 1.toLong()).executeAsList()
             .also { _currencies = it }
         return _currencies
+    }
+
+    fun getOneById(id: Long): Currencies? {
+        val currency = currencyQueries.getOneById(id).executeAsOneOrNull()
+        return currency
+    }
+
+    fun getAllByNameAndType(
+        name: String,
+        currencyTypeId: Long
+    ): List<Currencies> {
+        val currencies = currencyQueries
+            .getAllByNameAndType(
+                name = name,
+                symbol = name,
+                code = name,
+                symbolNative = name,
+                currencyTypeId = currencyTypeId
+            ).executeAsList()
+
+        return currencies
     }
 }
