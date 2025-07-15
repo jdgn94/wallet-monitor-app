@@ -14,19 +14,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -51,10 +55,11 @@ fun DialogBasic(
     if (open) {
         BoxWithConstraints{
             var searchText by remember { mutableStateOf("") }
-            val searchActive = remember { mutableStateOf(false) }
+            var searchActive by remember { mutableStateOf(false) }
+            val focusRequester = remember { FocusRequester() }
 
             fun changeSearchState() {
-                searchActive.value = !searchActive.value
+                searchActive = !searchActive
             }
 
             fun setSearchText(text:String) {
@@ -72,33 +77,46 @@ fun DialogBasic(
                     Column(
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        // title
+                        // dialog title
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.fillMaxWidth().padding(bottom = 5.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (searchActive.value)
-                                TextField(
+                            if (searchActive) {
+                                // show input to search
+                                BasicTextField(
                                     value = searchText,
                                     onValueChange = { setSearchText(it) },
-                                    label = { Text("Search") },
                                     singleLine = true,
+                                    textStyle = MaterialTheme.typography.headlineSmall,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .focusRequester(focusRequester)
                                 )
-                            else
+
+                                LaunchedEffect(Unit) {
+                                    focusRequester.requestFocus()
+                                }
+
+                                TextButton(onClick = { changeSearchState() }) {
+                                    Text(text = "Cancel")
+                                }
+                            } else {
+                                // show title input
                                 Text(
                                     text = stringResource(title),
-                                    style = MaterialTheme.typography.headlineSmall
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    modifier = Modifier.weight(1f)
                                 )
-                            if (searchAction != null) {
-                                TextButton(onClick = { changeSearchState() }) {
-                                    if (searchActive.value)
-                                        Text(text = "Cancel")
-                                    else
+                                if (searchAction != null) {
+                                    TextButton(onClick = { changeSearchState() }) {
                                         Text(text = "Search")
+                                    }
                                 }
                             }
                         }
+                        // dialog body
                         Box {
                             FlowRow(
                                 modifier = Modifier
@@ -141,6 +159,7 @@ fun DialogBasic(
                                     )
                             )
                         }
+                        // dialog actions
                     }
                 }
             }
