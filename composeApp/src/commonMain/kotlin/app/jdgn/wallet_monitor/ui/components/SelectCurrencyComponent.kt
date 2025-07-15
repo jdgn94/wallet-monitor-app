@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import app.jdgn.wallet_monitor.getScreenHeight
 import app.jdgn.wallet_monitor.getScreenWidth
-import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
+import app.jdgn.wallet_monitor.ui.components.basic.DialogBasic
 import app.jdgn.wallet_monitor.ui.components.composed.CurrencyItemComponent
 import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import app.walletmonitor.db.v0.Currencies
@@ -47,14 +47,11 @@ import walletmonitor.composeapp.generated.resources.selectCurrency
 @Preview
 @Composable
 fun SelectCurrencyComponent() {
-    val maxWidth = getScreenWidth() * 0.8f
-    val maxHeight = getScreenHeight() * 0.7f
     val defaultSelectionName = stringResource(Res.string.selectCurrency)
     val viewModel = koinViewModel<CurrencyViewModel>() // view model
     val scope = rememberCoroutineScope() // scope coroutine
     val showDialog = remember { mutableStateOf(false) } // dialog state
     val currencies = remember { mutableStateOf(emptyList<Currencies>()) } // list currencies
-    val scrollState = rememberScrollState()
     val currencySelect = remember {
         mutableStateOf<Currencies>(Currencies(
             id = 0,
@@ -97,43 +94,18 @@ fun SelectCurrencyComponent() {
         onSelect = { openCloseDialog() }
     )
 
-    if (showDialog.value) {
-        Dialog(onDismissRequest = { openCloseDialog() }){
-            Surface(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .widthIn(min = maxWidth)
-                    .heightIn(min = maxHeight),
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.surface,
-                tonalElevation = 6.dp
-            ) {
-                Column {
-                    // title dialog
-                    Text(
-                        text = stringResource(Res.string.selectCurrency),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                    // spacer
-                    Spacer(modifier = Modifier.height(16.dp))
-                    // body dialog
-                    FlowRow(
-                        modifier = Modifier
-                            .verticalScroll(scrollState)
-                            .fillMaxWidth(),
-                        itemVerticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        currencies.value.forEach { currency ->
-                            CurrencyItemComponent(
-                                currency,
-                                selected = currency.id == currencySelect.value.id,
-                                onSelect = { selectCurrency(it) }
-                            )
-                        }
-                    }
-                }
+    DialogBasic(
+        open = showDialog.value,
+        onDismissRequest = { openCloseDialog() },
+        title = Res.string.selectCurrency,
+        body = {
+            currencies.value.forEach { currency ->
+                CurrencyItemComponent(
+                    currency,
+                    selected = currency.id == currencySelect.value.id,
+                    onSelect = { selectCurrency(it) }
+                )
             }
         }
-    }
+    )
 }

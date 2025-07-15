@@ -8,6 +8,15 @@ enum class Platform {
     IOS
 }
 
+enum class Orientation {
+    PORTRAIT,
+    LANDSCAPE
+}
+
+interface Cancellable {
+    fun cancel()
+}
+
 expect val currentPlatform: Platform
 
 @Composable
@@ -15,3 +24,9 @@ expect fun getScreenWidth(): Dp
 
 @Composable
 expect fun getScreenHeight(): Dp
+
+expect class OrientationManager {
+    fun getOrientation(): Orientation
+    fun observeOrientation(onChange: (Orientation) -> Unit): Cancellable
+}
+
