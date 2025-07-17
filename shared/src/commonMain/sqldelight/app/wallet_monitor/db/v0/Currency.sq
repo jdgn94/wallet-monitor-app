@@ -96,5 +96,5 @@ SELECT
 FROM
     currencies
 WHERE
-    (name = ? OR symbol = ? OR code = ? OR symbolNative = ?)
+    (LOWER(name) LIKE ? OR LOWER(symbol) LIKE ? OR LOWER(code) LIKE ? OR LOWER(symbolNative) LIKE ?)
     AND currencyTypeId IN (?);

@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -37,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import app.jdgn.wallet_monitor.getScreenHeight
 import app.jdgn.wallet_monitor.getScreenWidth
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -57,6 +61,7 @@ fun DialogBasic(
             var searchText by remember { mutableStateOf("") }
             var searchActive by remember { mutableStateOf(false) }
             val focusRequester = remember { FocusRequester() }
+            val searchTextFlow = remember { MutableStateFlow(searchText) }
 
             fun changeSearchState() {
                 searchActive = !searchActive
@@ -66,11 +71,28 @@ fun DialogBasic(
                 searchText = text
             }
 
+            // effect to update flow on change text
+            LaunchedEffect(searchText) {
+                searchTextFlow.value = searchText
+            }
+
+            // effect to get flow with debounce
+            LaunchedEffect(searchTextFlow) {
+                searchTextFlow
+                    .debounce(1000L) // 1000ms = 1 segundo
+                    .collect { debouncedText ->
+                        // only execute if text is not empty
+                        if (debouncedText.isNotEmpty()) {
+                            searchAction?.invoke(debouncedText)
+                        }
+                    }
+            }
+
             Dialog(onDismissRequest = { onDismissRequest() }) {
                 Surface(
                     modifier = Modifier
-                        .width(maxWidth)
-                        .height(maxHeight),
+                        .widthIn(max = maxWidth)
+                        .heightIn(max = maxHeight),
                     shape = RoundedCornerShape(16.dp),
                     color = MaterialTheme.colorScheme.surface,
                 ) {

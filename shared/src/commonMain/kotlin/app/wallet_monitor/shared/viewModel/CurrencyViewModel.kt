@@ -34,10 +34,10 @@ class CurrencyViewModel(
     ): List<Currencies> {
         val currencies = currencyQueries
             .getAllByNameAndType(
-                name = name,
-                symbol = name,
-                code = name,
-                symbolNative = name,
+                value_ = "%$name%",
+                value__ = "%$name%",
+                value___ = "%$name%",
+                value____ = "%$name%",
                 currencyTypeId = currencyTypeId
             ).executeAsList()
 

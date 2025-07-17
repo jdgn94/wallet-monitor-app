@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +30,8 @@ fun CurrencyItemComponent(
     widthFraction: Float = 0.33333334f,
     onSelect: ((Currencies) -> Unit)? = null
 ) {
+    val currencyDeprecated = (currency.currencyTypeId == 1.toLong() && currency.countries == "[]")
+
     fun internalSelect() {
         onSelect?.invoke(currency)
     }
@@ -40,6 +43,8 @@ fun CurrencyItemComponent(
         widthFraction = widthFraction,
         backgroundColor = if (selected) {
             MaterialTheme.colorScheme.primary
+        } else if (currencyDeprecated) {
+            MaterialTheme.colorScheme.error
         } else {
             MaterialTheme.colorScheme.surface
         },
