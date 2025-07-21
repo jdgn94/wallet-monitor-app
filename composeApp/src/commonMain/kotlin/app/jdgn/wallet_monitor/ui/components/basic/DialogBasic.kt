@@ -1,6 +1,8 @@
 package app.jdgn.wallet_monitor.ui.components.basic
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
@@ -35,15 +38,20 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import app.jdgn.wallet_monitor.getScreenHeight
 import app.jdgn.wallet_monitor.getScreenWidth
+import app.jdgn.wallet_monitor.theme.extraColor
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(FlowPreview::class)
 @Composable
 fun DialogBasic(
     open: Boolean,
@@ -82,9 +90,7 @@ fun DialogBasic(
                     .debounce(1000L) // 1000ms = 1 segundo
                     .collect { debouncedText ->
                         // only execute if text is not empty
-                        if (debouncedText.isNotEmpty()) {
-                            searchAction?.invoke(debouncedText)
-                        }
+                        searchAction?.invoke(debouncedText)
                     }
             }
 
@@ -101,7 +107,7 @@ fun DialogBasic(
                     ) {
                         // dialog title
                         Row(
-                            modifier = Modifier.fillMaxWidth().padding(bottom = 5.dp),
+                            modifier = Modifier.padding(bottom = 5.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -139,11 +145,10 @@ fun DialogBasic(
                             }
                         }
                         // dialog body
-                        Box {
+                        Box(modifier = Modifier.heightIn(max = maxHeight - 150.dp)) {
                             FlowRow(
                                 modifier = Modifier
-                                    .verticalScroll(scrollState)
-                                    .fillMaxWidth(),
+                                    .verticalScroll(scrollState),
                                 itemVerticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center,
                             ) {
@@ -182,6 +187,27 @@ fun DialogBasic(
                             )
                         }
                         // dialog actions
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            TextButton(onClick = { onDismissRequest() }) {
+                                Text(
+                                    text = "OK",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.extraColor.info.color
+                                )
+                            }
+                            TextButton(onClick = { onDismissRequest() }) {
+                                Text(
+                                    text = "Cancel",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        }
                     }
                 }
             }
