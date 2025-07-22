@@ -35,6 +35,8 @@ expect class ToastManager {
     fun showToast(message: String, duration: ToastDuration = ToastDuration.SHORT)
 }
 
+expect fun getSystemLanguage(): String
+
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 expect class OrientationManager {
     fun getOrientation(): Orientation

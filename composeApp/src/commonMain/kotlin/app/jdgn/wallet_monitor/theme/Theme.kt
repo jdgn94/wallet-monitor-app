@@ -17,6 +17,8 @@ data class ExtendedColorScheme(
     val info: ColorFamily,
 )
 
+private var localDarkTheme: Boolean = false
+
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
@@ -381,13 +383,21 @@ data class ColorFamily(
 val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
+val ColorScheme.extraColor: ExtendedColorScheme @Composable get() = extendedColor()
 
-val ColorScheme.extraColor: ExtendedColorScheme @Composable get() = extendedLight
+@Composable
+fun extendedColor(): ExtendedColorScheme {
+    if (localDarkTheme)
+        return extendedDark
+    return extendedLight
+}
+
 @Composable
 internal fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    localDarkTheme = darkTheme
     val colorScheme = if (darkTheme) darkScheme else lightScheme
     val coinRoutineColorsPalette = if (darkTheme) darkCoinRoutineColorsPalette else lightCoinRoutineColorsPalette
 

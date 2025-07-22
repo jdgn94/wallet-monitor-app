@@ -12,27 +12,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.jdgn.wallet_monitor.ui.components.SelectCurrencyComponent
+import app.jdgn.wallet_monitor.ui.components.SelectLanguageComponent
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import walletmonitor.composeapp.generated.resources.Res
-import walletmonitor.composeapp.generated.resources.mainCurrency
+import walletmonitor.composeapp.generated.resources.mainLanguage
 
-@Preview
 @Composable
-fun SetDefaultCurrency() {
+fun SetDefaultLanguage() {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(Res.string.mainCurrency),
+            text = stringResource(Res.string.mainLanguage),
             modifier = Modifier.padding(horizontal = 20.dp),
             textAlign = TextAlign.Center,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold
         )
-        SelectCurrencyComponent(defaultCurrencySelectId = 149.toLong())
+        SelectLanguageComponent()
     }
 }

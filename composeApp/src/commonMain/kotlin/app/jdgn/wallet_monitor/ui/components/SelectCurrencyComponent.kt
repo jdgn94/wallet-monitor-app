@@ -5,8 +5,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
-import androidx.compose.foundation.content.MediaType.Companion.Text
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,6 +31,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import walletmonitor.composeapp.generated.resources.Res
+import walletmonitor.composeapp.generated.resources.close
 import walletmonitor.composeapp.generated.resources.currencyDeprecated
 import walletmonitor.composeapp.generated.resources.selectCurrency
 
@@ -48,7 +47,7 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
     var visibleCharCount by remember { mutableStateOf(0) } // state to animate deprecate currency
     val deprecatedText = stringResource(Res.string.currencyDeprecated)
     val currencySelect = remember {
-        mutableStateOf<Currencies>(Currencies(
+        mutableStateOf(Currencies(
             id = 0,
             name = "",
             symbol = "",
@@ -121,7 +120,7 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
             AnimatedContent(
                 targetState = deprecatedText.take(visibleCharCount),
                 transitionSpec = {
-                    fadeIn(animationSpec = tween(150)) with
+                    fadeIn(animationSpec = tween(150)) togetherWith
                             fadeOut(animationSpec = tween(150))
                 }
             ) { visibleText ->
@@ -139,7 +138,9 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
         onDismissRequest = { openCloseDialog() },
         searchAction = { searchCurrency(it) },
         title = Res.string.selectCurrency,
-        body = {
+        showActions = true,
+        cancelText = Res.string.close,
+        content = {
             currencies.value.forEach { currency ->
                 CurrencyItemComponent(
                     currency,

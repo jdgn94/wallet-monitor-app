@@ -1,44 +1,17 @@
 package app.jdgn.wallet_monitor.ui.components.basic
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -50,19 +23,31 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import walletmonitor.composeapp.generated.resources.Res
+import walletmonitor.composeapp.generated.resources.cancel
+import walletmonitor.composeapp.generated.resources.confirm
 
 @OptIn(FlowPreview::class)
 @Composable
 fun DialogBasic(
     open: Boolean,
     onDismissRequest: (() -> Unit),
+    onConfirmRequest: (() -> Unit)? = null,
     searchAction: ((String) -> Unit)? = null,
     title: StringResource,
-    body: @Composable (() -> Unit)
+    content: @Composable (() -> Unit),
+    showActions: Boolean = true,
+    confirmText: StringResource = Res.string.confirm,
+    cancelText: StringResource = Res.string.cancel,
 ) {
     val scrollState = rememberScrollState()
     val maxWidth = getScreenWidth() * 0.8f
     val maxHeight = getScreenHeight() * 0.7f
+
+    fun onConfirmAndDismissRequest() {
+        onConfirmRequest?.invoke()
+        onDismissRequest()
+    }
 
     if (open) {
         BoxWithConstraints{
@@ -145,7 +130,9 @@ fun DialogBasic(
                             }
                         }
                         // dialog body
-                        Box(modifier = Modifier.heightIn(max = maxHeight - 150.dp)) {
+                        Box(modifier = Modifier.heightIn(
+                            max = if (showActions) maxHeight - 150.dp else maxHeight
+                        )) {
                             FlowRow(
                                 modifier = Modifier
                                     .verticalScroll(scrollState),
@@ -153,7 +140,7 @@ fun DialogBasic(
                                 horizontalArrangement = Arrangement.Center,
                             ) {
                                 Spacer(Modifier.fillMaxWidth().height(16.dp))
-                                body()
+                                content()
                                 Spacer(Modifier.fillMaxWidth().height(16.dp))
                             }
 
@@ -187,27 +174,29 @@ fun DialogBasic(
                             )
                         }
                         // dialog actions
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            TextButton(onClick = { onDismissRequest() }) {
-                                Text(
-                                    text = "OK",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.extraColor.info.color
-                                )
+                        if (showActions)
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                if (onConfirmRequest != null)
+                                    TextButton(onClick = { onConfirmAndDismissRequest() }) {
+                                        Text(
+                                            text = stringResource(confirmText),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.extraColor.info.color
+                                        )
+                                    }
+                                TextButton(onClick = { onDismissRequest() }) {
+                                    Text(
+                                        text = stringResource(cancelText),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                }
                             }
-                            TextButton(onClick = { onDismissRequest() }) {
-                                Text(
-                                    text = "Cancel",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.error
-                                )
-                            }
-                        }
                     }
                 }
             }

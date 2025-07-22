@@ -6,8 +6,12 @@
     <string name="categoryInfoWelcome">Categorize your expenses to keep track of them in more detail and in a more organized way.</string>
     <!-- configs -->
     <string name="mainCurrency">Select the main currency</string>
+    <string name="mainLanguage">Select the main language</string>
     <string name="selectCurrency">Select currency</string>
     <string name="currencyDeprecated">This currency is no longer used</string>
+    <string name="confirm">OK</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
     <!-- bottom bar -->
     <string name="home">Home</string>
     <string name="transactions">Transactions</string>

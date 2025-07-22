@@ -24,6 +24,8 @@ import platform.Foundation.NSTimer
 import platform.Foundation.NSRunLoop
 import platform.Foundation.NSDefaultRunLoopMode
 import platform.Foundation.NSDate
+import platform.Foundation.NSLocale
+import platform.Foundation.preferredLanguages
 
 actual val currentPlatform = Platform.IOS
 
@@ -72,6 +74,11 @@ actual class ToastManager {
             }
         )
     }
+}
+
+actual fun getSystemLanguage(): String {
+    val preferred = NSLocale.preferredLanguages.firstOrNull() as? String
+    return preferred?.substringBefore("-") ?: "en"
 }
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")

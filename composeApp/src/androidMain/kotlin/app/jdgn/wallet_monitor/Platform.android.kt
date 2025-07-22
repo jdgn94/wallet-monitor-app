@@ -8,8 +8,8 @@ import androidx.compose.ui.unit.dp
 import android.content.Context
 import android.content.res.Configuration
 import android.hardware.display.DisplayManager
-import android.view.Display
 import android.widget.Toast
+import java.util.Locale
 
 actual val currentPlatform = Platform.ANDROID
 
@@ -37,6 +37,10 @@ actual class ToastManager(private val context: Context) {
 
         Toast.makeText(context, message, toastDuration).show()
     }
+}
+
+actual fun getSystemLanguage(): String {
+    return Locale.getDefault().language
 }
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")

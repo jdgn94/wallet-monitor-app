@@ -6,8 +6,12 @@
     <string name="categoryInfoWelcome">Categorizar tus gastos para llevar un control mas detallado y organizado.</string>
     <!-- configs -->
     <string name="mainCurrency">Seleccione la moneda principal</string>
+    <string name="mainLanguage">Seleccione El lenguaje principal</string>
     <string name="selectCurrency">Seleccionar moneda</string>
     <string name="currencyDeprecated">Esta moneda ya no es usada</string>
+    <string name="confirm">OK</string>
+    <string name="close">Cerrar</string>
+    <string name="cancel">Cancelar</string>
     <!-- bottom bar-->
     <string name="home">Inicio</string>
     <string name="transactions">Transacciones</string>
