@@ -116,7 +116,7 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
             maxWithDp = 300.dp,
             onSelect = { openCloseDialog() }
         )
-        // Texto animado para moneda deprecada
+        // Text animated for deprecated currency
         if (currencySelect.value.currencyTypeId == 1.toLong() && currencySelect.value.countries == "[]") {
             AnimatedContent(
                 targetState = deprecatedText.take(visibleCharCount),

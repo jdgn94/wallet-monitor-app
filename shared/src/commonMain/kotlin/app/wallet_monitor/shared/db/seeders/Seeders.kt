@@ -11,6 +11,7 @@ class Seeders(
 ) {
     suspend fun importCurrencyTypeSeedData() {
         val jsonContent = resourceLoader.asString("currency_type_seed.json")
+        currencyTypeRepository.importCurrencyTypeFromJson(jsonContent)
     }
 
     suspend fun importCurrencySeedData() {

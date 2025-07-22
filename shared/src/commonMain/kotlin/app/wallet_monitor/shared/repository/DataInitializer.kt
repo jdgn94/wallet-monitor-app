@@ -43,14 +43,14 @@ class DataInitializer: KoinComponent {
 
     private suspend fun getInitialData() {
         println("calling to api")
-        httpController.getRequest(url = "/currency_type")
-            .onSuccess {
-                println("this is my calling result: $it")
-            }
-            .onError {
-                println("error on get data: $it")
+//        httpController.getRequest(url = "/currency_type")
+//            .onSuccess {
+//                println("this is my calling result: $it")
+//            }
+//            .onError {
+//                println("error on get data: $it")
                 insertCurrencies()
-            }
+//            }
     }
 
     private suspend fun insertCurrencies() {
@@ -59,6 +59,7 @@ class DataInitializer: KoinComponent {
         val currencyTypeProvider = CurrencyTypeRepository(currencyTypes)
         val importer = Seeders(resourceLoader, currencyProvider, currencyTypeProvider)
         try {
+            importer.importCurrencyTypeSeedData()
             importer.importCurrencySeedData()
             println("Currency data imported successfully")
         } catch (e: Exception) {
