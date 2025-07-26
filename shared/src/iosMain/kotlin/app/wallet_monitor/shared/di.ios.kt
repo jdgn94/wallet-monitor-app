@@ -7,4 +7,5 @@ import org.koin.dsl.module
 actual val nativeModules = module {
     single { DriverFactory() }
     single<SqlDriver> { get<DriverFactory>().createDriver() }
+    single { createDataStore { "" } }
 }

@@ -1,5 +1,6 @@
 package app.wallet_monitor.shared.repository
 
+import app.wallet_monitor.shared.UserPreferences
 import app.wallet_monitor.shared.networking.HttpController
 import app.wallet_monitor.shared.utils.ResourceLoader
 
@@ -21,6 +22,9 @@ class DataInitializer: KoinComponent {
     private val currencyTypes: CurrencyTypeQueries by inject()
     private val currencies: CurrencyQueries by inject()
     private val exchangeRates: ExchangeRateQueries by inject()
+    // Inject user preferences
+    val userPreferences: UserPreferences by inject()
+
     // http
     private val httpController: HttpController = HttpController()
 

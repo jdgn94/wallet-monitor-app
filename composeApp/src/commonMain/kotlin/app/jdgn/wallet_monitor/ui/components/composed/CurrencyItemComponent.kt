@@ -24,7 +24,7 @@ import app.walletmonitor.db.v0.Currencies
 fun CurrencyItemComponent(
     currency: Currencies,
     selected: Boolean = false,
-    maxWithDp: Dp = 200.dp,
+    maxWidthDp: Dp = 200.dp,
     margin: PaddingValues = PaddingValues(3.dp),
     padding: PaddingValues = PaddingValues(6.dp),
     widthFraction: Float = 0.33333334f,
@@ -39,7 +39,7 @@ fun CurrencyItemComponent(
     CustomBox(
         margin = margin,
         padding = padding,
-        maxWidthDp = maxWithDp,
+        maxWidthDp = maxWidthDp,
         widthFraction = widthFraction,
         backgroundColor = if (selected) {
             MaterialTheme.colorScheme.primary

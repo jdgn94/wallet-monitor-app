@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,24 +19,24 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.LocalResource
-import app.wallet_monitor.shared.GlobalStateManager
-import app.wallet_monitor.shared.UserPreferences
+import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview
 fun SplashScreen(navController: NavHostController) {
+    val viewModel = koinViewModel<UserPreferenceViewModel>()
     val scale = remember { Animatable(1f) } // Initial scale
-    val userPreferences = GlobalStateManager.userPreferences!!
-    val defaultCurrency = userPreferences.getInt("defaultCurrency").collectAsState(null).value
+    val defaultCurrency = viewModel.getString("currency")
 
 
     fun initialValidations() {
         println("defaultCurrency: $defaultCurrency")
-        if (defaultCurrency == null) {
+        if (defaultCurrency == null || defaultCurrency.isEmpty()) {
             println("go to initial config")
             navController.navigate("welcome"){
                 popUpTo(navController.graph.startDestinationId) {

@@ -6,8 +6,11 @@
     <string name="categoryInfoWelcome">Categorize your expenses to keep track of them in more detail and in a more organized way.</string>
     <!-- configs -->
     <string name="system">System</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
     <string name="mainCurrency">Select the main currency</string>
     <string name="mainLanguage">Select the main language</string>
+    <string name="mainTheme">Select the main theme</string>
     <string name="selectCurrency">Select currency</string>
     <string name="currencyDeprecated">This currency is no longer used</string>
     <string name="confirm">OK</string>

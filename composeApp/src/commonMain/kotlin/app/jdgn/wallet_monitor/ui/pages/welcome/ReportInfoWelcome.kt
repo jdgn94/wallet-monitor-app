@@ -24,8 +24,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import walletmonitor.composeapp.generated.resources.Res
 import walletmonitor.composeapp.generated.resources.reportInfoWelcome
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale

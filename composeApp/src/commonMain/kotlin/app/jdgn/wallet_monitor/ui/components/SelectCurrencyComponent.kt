@@ -112,7 +112,7 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
             currency = currencySelect.value,
             margin = PaddingValues(horizontal = 15.dp, vertical = 10.dp),
             widthFraction = 0.5f,
-            maxWithDp = 300.dp,
+            maxWidthDp = 300.dp,
             onSelect = { openCloseDialog() }
         )
         // Text animated for deprecated currency

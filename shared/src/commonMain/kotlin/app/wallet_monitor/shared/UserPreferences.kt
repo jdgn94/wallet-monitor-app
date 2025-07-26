@@ -9,8 +9,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UserPreferences(prefs: DataStore<Preferences>) {
-    private val dataStore: DataStore<Preferences> = prefs
+class UserPreferences(
+    private val dataStore: DataStore<Preferences>
+) {
 
     fun getPrefs(): DataStore<Preferences> {
         return dataStore

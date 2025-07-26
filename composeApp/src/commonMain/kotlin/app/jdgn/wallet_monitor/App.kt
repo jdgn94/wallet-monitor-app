@@ -2,34 +2,42 @@ package app.jdgn.wallet_monitor
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import app.jdgn.wallet_monitor.theme.AppTheme
 import app.jdgn.wallet_monitor.ui.src.Navigation
+import app.wallet_monitor.shared.APP_THEME_KEY
 import app.wallet_monitor.shared.GlobalStateManager
-import app.wallet_monitor.shared.UserPreferences
+import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview
 fun App(
-    prefs: DataStore<Preferences>,
+    onLanguageChanged: () -> Unit = {},
 ) {
+    val viewModel = koinViewModel<UserPreferenceViewModel>()
     val keyboardController = LocalSoftwareKeyboardController.current
     val interactionSource = remember { MutableInteractionSource() }
-    val userPreferences = UserPreferences(prefs)
-    GlobalStateManager.userPreferences = userPreferences
+    val darkTheme = viewModel.getString(APP_THEME_KEY);
 
+    GlobalStateManager.languageChange = onLanguageChanged
+
+    @Composable
+    fun getTheme(): Boolean {
+        if (darkTheme == "dark") return true
+        if (darkTheme == "light") return false
+        return isSystemInDarkTheme()
+    }
 
     AppTheme(
-        darkTheme = userPreferences.getBoolean("dark_mode").collectAsState(false).value,
+        darkTheme = getTheme(),
 //        dynamicColor = userPreferences.getBoolean("dynamic_color").collectAsState(false).value,
     ) {
         Box(
@@ -39,7 +47,6 @@ fun App(
                 onClick = { keyboardController?.hide() }
             )
         ) {
-
             Navigation()
         }
     }
