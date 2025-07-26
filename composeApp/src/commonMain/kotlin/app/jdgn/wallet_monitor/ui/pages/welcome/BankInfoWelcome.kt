@@ -41,9 +41,6 @@ fun BankInfoWelcome(isVisible: Boolean = true) {
     // Animation states
     var animationsTriggered by remember { mutableStateOf(false) }
 
-    // Scroll state
-    val scrollState = rememberScrollState()
-
     // Animated values for each element
     val bankOffsetX by animateFloatAsState(
         targetValue = if (animationsTriggered) 0f else -300f,
@@ -75,7 +72,7 @@ fun BankInfoWelcome(isVisible: Boolean = true) {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

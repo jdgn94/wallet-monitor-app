@@ -5,6 +5,7 @@
     <string name="reportInfoWelcome">Lleva un registro de tus gastos e ingresos.\nTambien podras obtener graficos para poder analizarlos.</string>
     <string name="categoryInfoWelcome">Categorizar tus gastos para llevar un control mas detallado y organizado.</string>
     <!-- configs -->
+    <string name="system">Sistema</string>
     <string name="mainCurrency">Seleccione la moneda principal</string>
     <string name="mainLanguage">Seleccione El lenguaje principal</string>
     <string name="selectCurrency">Seleccionar moneda</string>

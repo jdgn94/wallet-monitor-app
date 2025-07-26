@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -47,6 +48,7 @@ fun WelcomeScreen(navController: NavHostController) {
     val pagerState = rememberPagerState(initialPage = 0) { 3 } // 3 page in total
     // Track if user has visited the last page
     val hasVisitedLastPage = remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
     // Update the state when user visits the last page
     LaunchedEffect(pagerState.currentPage) {
@@ -96,18 +98,18 @@ fun WelcomeScreen(navController: NavHostController) {
             }
         },
         floatingActionButtonPosition = FabPosition.End
-    ) { ScreenContain(it, scope, pagerState) }
+    ) { ScreenContain(it, scope, pagerState, scrollState) }
 }
 
 @Composable
-private fun ScreenContain(internalPadding: PaddingValues, scope: CoroutineScope, pagerState: PagerState){
+private fun ScreenContain(internalPadding: PaddingValues, scope: CoroutineScope, pagerState: PagerState, scrollState: ScrollState){
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         // horizontal paginate
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.verticalScroll(scrollState).weight(1f)
         ) { page ->
             // Show page
             when (page) {

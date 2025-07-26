@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -49,7 +50,7 @@ fun CustomBox(
                 shape = RoundedCornerShape(16.dp),
                 spotColor = color,
                 ambientColor = color
-            )
+            ),
     ) {
         Surface(
             shape = RoundedCornerShape(16.dp),
@@ -68,6 +69,7 @@ fun CustomBox(
                     .background(backgroundColor?.copy(alpha = 0.2f) ?: MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
                     .padding(padding),
+                contentAlignment = Alignment.Center,
                 content = content
             )
         }

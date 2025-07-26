@@ -5,6 +5,7 @@
     <string name="reportInfoWelcome">Keep track of your expenses and income.\nYou can also view graphs to analyze them.</string>
     <string name="categoryInfoWelcome">Categorize your expenses to keep track of them in more detail and in a more organized way.</string>
     <!-- configs -->
+    <string name="system">System</string>
     <string name="mainCurrency">Select the main currency</string>
     <string name="mainLanguage">Select the main language</string>
     <string name="selectCurrency">Select currency</string>

@@ -37,9 +37,6 @@ fun ReportInfoWelcome(isVisible: Boolean = true) {
     // State to sequence animate controller
     var animationsTriggered by remember { mutableStateOf(false) }
 
-    // Scroll state
-    val scrollState = rememberScrollState()
-
     // Animate values for principal image (report)
     val reportScale by animateFloatAsState(
         targetValue = if (animationsTriggered) 1f else 0.2f,
@@ -94,7 +91,7 @@ fun ReportInfoWelcome(isVisible: Boolean = true) {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
