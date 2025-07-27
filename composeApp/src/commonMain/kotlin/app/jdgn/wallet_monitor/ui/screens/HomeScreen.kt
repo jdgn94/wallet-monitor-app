@@ -5,14 +5,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import app.jdgn.wallet_monitor.ui.components.basic.NavBar
+import app.jdgn.wallet_monitor.ui.pages.home.AccountsHome
+import app.wallet_monitor.shared.viewModel.AccountViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    Scaffold { padding ->
+    Scaffold(
+        topBar = {
+            NavBar(
+                navController = navController,
+                title = "Home",
+                backButton = false
+            )
+        }
+    ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            Text(text = "Home Screen")
+            AccountsHome()
+            Text("Otro contenido")
         }
 
     }

@@ -5,8 +5,17 @@ import walletmonitor.composeapp.generated.resources.*
 
 object LocalResource {
     object Icons {
+        val plus = Res.drawable.plus
+        val minus = Res.drawable.minus
+        val delete = Res.drawable.delete
         object Arrows {
-            val Forward = Res.drawable.arrow_forward
+            val forward = Res.drawable.arrow_forward
+            val enter = Res.drawable.enter
+            val down = Res.drawable.down_arrow
+            val up = Res.drawable.up_arrow
+            val left = Res.drawable.left_arrow
+            val right = Res.drawable.right_arrow
+            val back = Res.drawable.arrow_back
         }
         object Filled {
             val home = Res.drawable.home_filled
@@ -21,6 +30,7 @@ object LocalResource {
     object Images {
         val app_icon = Res.drawable.app_icon_image
         val bank = Res.drawable.bank_image
+        val cash = Res.drawable.cash_image
         val card = Res.drawable.contactless_image
         val piggy = Res.drawable.piggy_bank_image
         val pie_chart = Res.drawable.pie_chart

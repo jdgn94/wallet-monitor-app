@@ -56,7 +56,7 @@ fun InitialConfigScreen(navController: NavHostController) {
         val defaultCurrency = viewModelCurrencies.getDefaultCurrency()
         viewModelAccounts.createAccount(
             currencyId = defaultCurrency!!.id,
-            amount = 0.toLong(),
+            amount = 0.0,
             color = "#FF5C6BC0",
             name = accountName
         )

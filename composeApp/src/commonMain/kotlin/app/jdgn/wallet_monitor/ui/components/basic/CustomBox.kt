@@ -25,6 +25,7 @@ import app.jdgn.wallet_monitor.getScreenWidth
 @Composable
 fun CustomBox(
     modifier: Modifier = Modifier,
+    pickWidth: Dp? = null,
     padding: PaddingValues = PaddingValues(16.dp),
     margin: PaddingValues = PaddingValues(),
     color: Color = MaterialTheme.colorScheme.primary,
@@ -66,6 +67,7 @@ fun CustomBox(
         ) {
             Box(
                 modifier = modifier
+                    .width(pickWidth ?: boxWidth)
                     .background(backgroundColor?.copy(alpha = 0.2f) ?: MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
                     .padding(padding),

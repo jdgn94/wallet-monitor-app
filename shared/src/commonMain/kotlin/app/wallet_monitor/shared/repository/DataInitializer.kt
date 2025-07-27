@@ -63,9 +63,12 @@ class DataInitializer: KoinComponent {
 
     private suspend fun insertCurrencies() {
         val resourceLoader = ResourceLoader
-        val currencyProvider = CurrencyRepository(currencies)
         val currencyTypeProvider = CurrencyTypeRepository(currencyTypes)
-        val importer = Seeders(resourceLoader, currencyProvider, currencyTypeProvider)
+        val currencyProvider = CurrencyRepository(currencies)
+        val importer = Seeders(
+            resourceLoader,
+            currencyProvider,
+            currencyTypeProvider)
         try {
             importer.importCurrencyTypeSeedData()
             importer.importCurrencySeedData()

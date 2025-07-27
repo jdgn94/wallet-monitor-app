@@ -90,7 +90,7 @@ fun WelcomeScreen(navController: NavHostController) {
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
-                    painter = painterResource(Arrows.Forward),
+                    painter = painterResource(Arrows.forward),
                     contentDescription = "Continue",
                     tint = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.size(24.dp)

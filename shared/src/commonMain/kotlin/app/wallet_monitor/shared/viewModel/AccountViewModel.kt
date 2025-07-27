@@ -24,7 +24,7 @@ class AccountViewModel(
     fun createAccount(
         currencyId: Long,
         bankId: Long? = null,
-        amount: Long,
+        amount: Double,
         color: String,
         name: String
     ) {
