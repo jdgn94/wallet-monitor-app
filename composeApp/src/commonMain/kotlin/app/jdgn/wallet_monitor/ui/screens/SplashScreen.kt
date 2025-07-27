@@ -19,6 +19,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.LocalResource
+import app.wallet_monitor.shared.APP_CURRENCY_KEY
+import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,19 +31,26 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 @Preview
 fun SplashScreen(navController: NavHostController) {
-    val viewModel = koinViewModel<UserPreferenceViewModel>()
+    val viewModel = koinViewModel<CurrencyViewModel>()
     val scale = remember { Animatable(1f) } // Initial scale
-    val defaultCurrency = viewModel.getString("currency")
+    val defaultCurrency = viewModel.getDefaultCurrency()
 
 
     fun initialValidations() {
         println("defaultCurrency: $defaultCurrency")
-        if (defaultCurrency == null || defaultCurrency.isEmpty()) {
+        if (defaultCurrency == null) {
             println("go to initial config")
             navController.navigate("welcome"){
                 popUpTo(navController.graph.startDestinationId) {
                     inclusive = true
                 }
+            }
+            return
+        }
+
+        navController.navigate("home") {
+            popUpTo(navController.graph.startDestinationId) {
+                inclusive = true
             }
         }
     }

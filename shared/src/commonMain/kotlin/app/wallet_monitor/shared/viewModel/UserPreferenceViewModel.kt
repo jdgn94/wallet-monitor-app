@@ -12,8 +12,8 @@ class UserPreferenceViewModel(
         userPreferences.getString(key).firstOrNull()
     }
 
-    fun getBoolean(key: String) = runBlocking {
-        userPreferences.getBoolean(key).firstOrNull()
+    fun setString(key: String, value: String) = runBlocking {
+        userPreferences.setString(key, value)
     }
 
 }

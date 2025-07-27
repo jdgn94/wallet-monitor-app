@@ -5,6 +5,7 @@
     <string name="reportInfoWelcome">Keep track of your expenses and income.\nYou can also view graphs to analyze them.</string>
     <string name="categoryInfoWelcome">Categorize your expenses to keep track of them in more detail and in a more organized way.</string>
     <!-- configs -->
+    <string name="cash">Cash</string>
     <string name="system">System</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
@@ -12,6 +13,7 @@
     <string name="mainLanguage">Select the main language</string>
     <string name="mainTheme">Select the main theme</string>
     <string name="selectCurrency">Select currency</string>
+    <string name="selectTheme">Select theme</string>
     <string name="currencyDeprecated">This currency is no longer used</string>
     <string name="confirm">OK</string>
     <string name="close">Close</string>

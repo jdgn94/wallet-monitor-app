@@ -38,7 +38,11 @@ import walletmonitor.composeapp.generated.resources.selectCurrency
 @OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
-fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
+fun SelectCurrencyComponent(
+    defaultCurrencySelectId: Long? = null,
+    changeDefaultCurrency: Boolean = false,
+    changeCurrency: ((currency: Currencies) -> Unit)? = null
+) {
     val defaultSelectionName = stringResource(Res.string.selectCurrency)
     val viewModel = koinViewModel<CurrencyViewModel>() // view model
     val scope = rememberCoroutineScope() // scope coroutine
@@ -68,7 +72,7 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
 
     LaunchedEffect(true) {
         if (defaultCurrencySelectId != null) {
-             val defaultCurrency = viewModel.getOneById(defaultCurrencySelectId)
+            val defaultCurrency = viewModel.getOneById(defaultCurrencySelectId)
             if (defaultCurrency != null) currencySelect.value = defaultCurrency
         }
     }
@@ -97,6 +101,10 @@ fun SelectCurrencyComponent(defaultCurrencySelectId: Long? = null) {
     fun selectCurrency(currency: Currencies) {
         currencySelect.value = currency
         showDialog.value = false
+        if (changeDefaultCurrency) {
+            viewModel.setDefaultCurrency(currency.id)
+        }
+        changeCurrency?.invoke(currency)
     }
 
     fun searchCurrency(value: String) {

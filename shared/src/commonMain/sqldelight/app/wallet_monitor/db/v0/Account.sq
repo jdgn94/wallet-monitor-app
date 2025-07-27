@@ -1,0 +1,67 @@
+CREATE TABLE accounts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    currencyId INTEGER NOT NULL,
+    bankId INTEGER DEFAULT NULL,
+    amount INTEGER NOT NULL DEFAULT 0,
+    color TEXT NOT NULL CHECK(LENGTH(color) <= 10),
+    name TEXT NOT NULL,
+    createdAt TEXT NOT NULL DEFAULT (strftime('%s', 'now')),
+    updatedAt TEXT NOT NULL,
+    FOREIGN KEY (currencyId) REFERENCES currencies(id) ON DELETE CASCADE,
+    FOREIGN KEY (bankId) REFERENCES banks(id) ON DELETE CASCADE
+);
+
+getAll:
+SELECT
+    a.id,
+    a.amount,
+    a.color,
+    a.name,
+    a.createdAt,
+    a.updatedAt,
+    c.id currencyId,
+    c.name currencyName,
+    c.symbol,
+    c.decimalDigits,
+    c.code,
+    c.rounding,
+    c.symbolNative,
+    b.id bankId,
+    b.name bankName,
+    b.image
+FROM
+    accounts a
+    INNER JOIN currencies c ON a.currencyId = c.id
+    LEFT JOIN banks b ON a.bankId = b.id
+ORDER BY
+    c.id ASC,
+    a.name ASC;
+
+insert:
+INSERT INTO
+    accounts(currencyId, bankId, amount, color, name, updatedAt)
+VALUES
+    (?, ?, ?, ?, ?, ?);
+
+getOne:
+SELECT
+    a.id,
+    a.amount,
+    a.color,
+    a.name,
+    c.id currencyId,
+    c.name currencyName,
+    c.symbol,
+    c.decimalDigits,
+    c.code,
+    c.rounding,
+    c.symbolNative,
+    b.id bankId,
+    b.name bankName,
+    b.image
+FROM
+    accounts a
+    INNER JOIN currencies c ON a.currencyId = c.id
+    LEFT JOIN banks b ON a.bankId = b.id
+WHERE
+    a.id = ?;

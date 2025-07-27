@@ -6,3 +6,5 @@ import app.cash.sqldelight.db.SqlDriver
 expect class DriverFactory {
     fun createDriver(): SqlDriver
 }
+
+internal const val DB_NAME = "wallet_monitor.v0.db"

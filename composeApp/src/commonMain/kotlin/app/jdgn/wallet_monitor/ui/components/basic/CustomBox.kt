@@ -49,7 +49,7 @@ fun CustomBox(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(16.dp),
                 spotColor = color,
-                ambientColor = color
+                ambientColor = color,
             ),
     ) {
         Surface(

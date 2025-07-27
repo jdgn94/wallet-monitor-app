@@ -1,16 +1,18 @@
 package app.wallet_monitor.shared.viewModel
 
 import androidx.lifecycle.ViewModel
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
-import app.wallet_monitor.db.WalletMonitorDB
+import androidx.lifecycle.viewModelScope
+import app.wallet_monitor.shared.APP_CURRENCY_KEY
+import app.wallet_monitor.shared.UserPreferences
 import app.walletmonitor.db.v0.Currencies
 import app.walletmonitor.db.v0.CurrencyQueries
-import org.koin.core.component.inject
-import kotlin.getValue
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class CurrencyViewModel(
-    private val currencyQueries: CurrencyQueries
+    private val currencyQueries: CurrencyQueries,
+    private val userPreferences: UserPreferences
 ): ViewModel() {
     private var _currencies: List<Currencies> = listOf()
 
@@ -21,6 +23,19 @@ class CurrencyViewModel(
         currencyQueries.getAllByType(currencyTypeId = 1.toLong()).executeAsList()
             .also { _currencies = it }
         return _currencies
+    }
+
+    fun getDefaultCurrency(): Currencies? {
+        val currencyId = runBlocking { userPreferences.getInt(APP_CURRENCY_KEY).firstOrNull() }
+        if (currencyId == null) return null
+        val currency = currencyQueries.getOneById(currencyId.toLong()).executeAsOneOrNull()
+        return currency
+    }
+
+    fun setDefaultCurrency(id: Long) {
+        viewModelScope.launch {
+            userPreferences.setInt(APP_CURRENCY_KEY, id.toInt())
+        }
     }
 
     fun getOneById(id: Long): Currencies? {

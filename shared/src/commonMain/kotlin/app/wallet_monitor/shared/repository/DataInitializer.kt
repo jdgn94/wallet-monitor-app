@@ -6,6 +6,8 @@ import app.wallet_monitor.shared.utils.ResourceLoader
 
 import org.koin.core.component.KoinComponent
 import app.wallet_monitor.shared.db.seeders.Seeders
+import app.walletmonitor.db.v0.AccountQueries
+import app.walletmonitor.db.v0.BankQueries
 import app.walletmonitor.db.v0.CurrencyQueries
 import app.walletmonitor.db.v0.CurrencyTypeQueries
 import app.walletmonitor.db.v0.ExchangeRateQueries
@@ -13,8 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
-import app.wallet_monitor.shared.utils.onError
-import app.wallet_monitor.shared.utils.onSuccess
+import kotlin.getValue
 
 @Suppress("UNCHECKED_CAST")
 class DataInitializer: KoinComponent {
@@ -22,6 +23,9 @@ class DataInitializer: KoinComponent {
     private val currencyTypes: CurrencyTypeQueries by inject()
     private val currencies: CurrencyQueries by inject()
     private val exchangeRates: ExchangeRateQueries by inject()
+    private val banks: BankQueries by inject()
+    private val accounts: AccountQueries by inject()
+
     // Inject user preferences
     val userPreferences: UserPreferences by inject()
 

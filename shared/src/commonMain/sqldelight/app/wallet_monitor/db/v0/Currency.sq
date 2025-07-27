@@ -11,7 +11,7 @@ CREATE TABLE currencies (
     FOREIGN KEY (currencyTypeId) REFERENCES currencyTypes(id) ON DELETE CASCADE
 );
 
-all:
+getAll:
 SELECT * FROM currencies;
 
 insert:

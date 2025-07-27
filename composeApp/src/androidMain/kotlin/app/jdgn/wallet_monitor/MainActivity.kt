@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         val locale = Locale(code)
         val config = Configuration(newBase.resources.configuration)
 
-        config.setLocale(locale)
         super.attachBaseContext(ContextWrapper(newBase.createConfigurationContext(config)))
+        Locale.setDefault(locale)
     }
 }

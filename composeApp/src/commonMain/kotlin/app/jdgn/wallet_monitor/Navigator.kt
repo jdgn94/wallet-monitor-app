@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import app.jdgn.wallet_monitor.ui.screens.HomeScreen
 import app.jdgn.wallet_monitor.ui.screens.InitialConfigScreen
 import app.jdgn.wallet_monitor.ui.screens.SplashScreen
 import app.jdgn.wallet_monitor.ui.screens.WelcomeScreen
@@ -26,11 +27,9 @@ fun Navigation(modifier:Modifier = Modifier) {
         composable("initial_config") {
             InitialConfigScreen(navController)
         }
-//        composable("accounts") {
-//            Accounts(
-//                navController = navController
-//            )
-//        }
+        composable("home") {
+            HomeScreen(navController)
+        }
     }
 }
 

@@ -8,6 +8,15 @@ object LocalResource {
         object Arrows {
             val Forward = Res.drawable.arrow_forward
         }
+        object Filled {
+            val home = Res.drawable.home_filled
+        }
+        object Outlined {
+            val home = Res.drawable.home_outlined
+        }
+    }
+    object Texts {
+        val app_name = Res.string.app_name
     }
     object Images {
         val app_icon = Res.drawable.app_icon_image

@@ -12,32 +12,32 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LanguageViewModel(
-    private val userPreferences: UserPreferences
+    private val _userPreferences: UserPreferences
 ): ViewModel() {
-    private val languageModels = listOf(
+    private val _languageModels = listOf(
         LanguageModel("", "", ""),
         LanguageModel("en", "English", "en-us"),
         LanguageModel("es", "Español", "es-lat")
     )
 
     fun getLanguages(): List<LanguageModel> {
-        return languageModels
+        return _languageModels
     }
 
     fun getDefaultLanguage(): LanguageModel {
-        val languageCode = runBlocking { userPreferences.getString(APP_LANGUAGE_KEY).firstOrNull() }
-        val language = languageModels.find { it.id == languageCode }
+        val languageCode = runBlocking { _userPreferences.getString(APP_LANGUAGE_KEY).firstOrNull() }
+        val language = _languageModels.find { it.id == languageCode }
         println("get lang: $language")
 
         if (language != null) return language
-        return languageModels[0]
+        return _languageModels[0]
     }
 
     fun setDefaultLanguage(languageModel: LanguageModel) {
         val lang = languageModel.id
         println("saving lang: $lang")
         viewModelScope.launch {
-            userPreferences.setString(APP_LANGUAGE_KEY, lang)
+            _userPreferences.setString(APP_LANGUAGE_KEY, lang)
 
             delay(100)
             GlobalStateManager.languageChange()

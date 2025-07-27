@@ -61,7 +61,7 @@ fun SelectLanguageComponent() {
                     margin = PaddingValues(vertical = 5.dp),
                     onClick = { selectLanguage(language) },
                     backgroundColor =
-                        if (language == selectedLanguage)
+                        if (language == selectedLanguage.value)
                             MaterialTheme.colorScheme.primary
                         else
                             MaterialTheme.colorScheme.surface,
