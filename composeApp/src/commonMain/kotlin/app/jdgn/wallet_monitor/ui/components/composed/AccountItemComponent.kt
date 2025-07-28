@@ -37,6 +37,7 @@ import walletmonitor.composeapp.generated.resources.transactions
 fun AccountItemComponent(
     account: GetAll,
     onClick: (Long) -> Unit,
+    margin: PaddingValues = PaddingValues(end = 10.dp)
 ) {
     val color = hexStringToColor(account.color)
     val transactions = stringResource(Res.string.transactions)
@@ -48,7 +49,7 @@ fun AccountItemComponent(
     CustomBox(
         pickWidth = 150.dp,
         color = color,
-        margin = PaddingValues(end = 10.dp),
+        margin = margin,
         onClick = { onClick(account.id) }
     ) {
         Box(

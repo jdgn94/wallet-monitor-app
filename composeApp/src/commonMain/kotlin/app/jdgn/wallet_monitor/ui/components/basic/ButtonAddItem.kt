@@ -29,7 +29,7 @@ fun ButtonAddItem(
 ) {
     Box(
         modifier = Modifier
-            .width(width = 150.dp)
+            .width(150.dp)
             .padding(margin)
             .dottedBorder(
                 color = MaterialTheme.colorScheme.primary,

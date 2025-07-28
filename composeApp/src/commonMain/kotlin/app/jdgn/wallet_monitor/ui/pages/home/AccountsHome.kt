@@ -49,6 +49,7 @@ fun AccountsHome() {
     }
 
     CustomRow(
+        verticalAlignment = Alignment.CenterVertically
     ) {
         allAccounts.forEach { account ->
             AccountItemComponent(account, onClick = { accountDetails(it) })

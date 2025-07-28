@@ -39,11 +39,10 @@ fun CustomBox(
     val screenWidth = getScreenWidth()
 
     // Calculate width 50%
-    val boxWidth = (screenWidth * widthFraction).coerceAtMost(maxWidthDp)
+    val boxWidth = pickWidth ?: (screenWidth * widthFraction).coerceAtMost(maxWidthDp)
 
     Box(
         modifier = Modifier
-            .width(boxWidth)
             .widthIn(max = 200.dp)
             .padding(margin)
             .shadow(
@@ -63,7 +62,6 @@ fun CustomBox(
             onClick = onClick ?: { },
             enabled = onClick != null,
 //            stateLayerColor = color.copy(alpha = 0.12f),
-            modifier = Modifier.fillMaxWidth(),
         ) {
             Box(
                 modifier = modifier
