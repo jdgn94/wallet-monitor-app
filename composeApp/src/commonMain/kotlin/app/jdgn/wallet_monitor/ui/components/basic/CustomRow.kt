@@ -31,15 +31,13 @@ fun CustomRow(
     content: @Composable (RowScope.() -> Unit)
     ) {
     val scrollState = rememberScrollState()
-    val edgeWidth = 32.dp
+    val edgeWidth = 16.dp
     val density = LocalDensity.current
     var edgeFraction by remember { mutableStateOf(0.1f) }
 
     Box{
         Row(
-            modifier = Modifier
-                .horizontalScroll(scrollState)
-                .padding(8.dp),
+            modifier = Modifier.horizontalScroll(scrollState),
             horizontalArrangement = horizontalArrangement,
             verticalAlignment = verticalAlignment,
         ) {

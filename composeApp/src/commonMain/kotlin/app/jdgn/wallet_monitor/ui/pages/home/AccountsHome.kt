@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.components.basic.ButtonAddItem
 import app.jdgn.wallet_monitor.ui.components.basic.CustomRow
 import app.jdgn.wallet_monitor.ui.components.composed.AccountItemComponent
@@ -39,13 +40,13 @@ import app.wallet_monitor.shared.viewModel.AccountViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AccountsHome() {
-    val scrollState = rememberScrollState()
+fun AccountsHome(navController: NavHostController) {
     val viewModel = koinViewModel<AccountViewModel>()
     val allAccounts = viewModel.getAccounts()
 
     fun accountDetails(id: Long) {
         println("go to account details $id")
+        navController.navigate("account/$id")
     }
 
     CustomRow(
@@ -55,7 +56,7 @@ fun AccountsHome() {
             AccountItemComponent(account, onClick = { accountDetails(it) })
         }
         ButtonAddItem(
-            onClick = { println("add account") },
+            onClick = { navController.navigate("account/") },
         )
     }
 }

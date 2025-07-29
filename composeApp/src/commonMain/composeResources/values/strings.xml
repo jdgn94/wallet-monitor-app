@@ -30,6 +30,7 @@
     <string name="goal">Goal</string>
     <string name="expensesIncome">Expenses and Income</string>
     <string name="accounts">Accounts</string>
+    <string name="account">Account</string>
     <string name="persons">Persons</string>
     <string name="pin">Pin</string>
     <string name="biometric">Biometric</string>

@@ -30,6 +30,7 @@
     <string name="goal">Meta</string>
     <string name="expenses_income">Gastos e Ingresos</string>
     <string name="accounts">Cuentas</string>
+    <string name="account">Cuenta</string>
     <string name="persons">Personas</string>
     <string name="pin">Pin</string>
     <string name="biometric">Biometrico</string>

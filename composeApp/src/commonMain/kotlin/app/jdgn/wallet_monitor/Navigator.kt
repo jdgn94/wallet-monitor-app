@@ -1,34 +1,60 @@
 package app.jdgn.wallet_monitor.ui.src
 
-//import HomeScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import app.jdgn.wallet_monitor.ui.screens.AccountScreen
 import app.jdgn.wallet_monitor.ui.screens.HomeScreen
 import app.jdgn.wallet_monitor.ui.screens.InitialConfigScreen
 import app.jdgn.wallet_monitor.ui.screens.SplashScreen
 import app.jdgn.wallet_monitor.ui.screens.WelcomeScreen
 import app.jdgn.wallet_monitor.utils.AppConstants
 
+expect fun NavBackStackEntry.getArgumentString(key: String): String?
+
+object Routes {
+    const val SPLASH = "splash"
+    const val WELCOME = "welcome"
+    const val INITIAL_CONFIG = "initial_config"
+    const val HOME = "home"
+    const val ACCOUNT = "account/{id}"
+}
+
 @Composable
 fun Navigation(modifier:Modifier = Modifier) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "splash") {
-        composable("splash") {
+    NavHost(navController = navController, startDestination = Routes.SPLASH) {
+        composable(route = Routes.SPLASH) {
             SplashScreen(navController)
         }
-        composable("welcome") {
+        composable(route = Routes.WELCOME) {
             WelcomeScreen(navController)
         }
-        composable("initial_config") {
+        composable(route = Routes.INITIAL_CONFIG) {
             InitialConfigScreen(navController)
         }
-        composable("home") {
+        composable(route = Routes.HOME) {
             HomeScreen(navController)
+        }
+        composable(
+            route = Routes.ACCOUNT,
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) { backStackEntry ->
+            val id = backStackEntry.getArgumentString("id")?.toLongOrNull()
+            AccountScreen(navController, id)
         }
     }
 }

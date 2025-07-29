@@ -3,6 +3,7 @@ package app.wallet_monitor.shared.viewModel
 import androidx.lifecycle.ViewModel
 import app.walletmonitor.db.v0.AccountQueries
 import app.walletmonitor.db.v0.GetAll
+import app.walletmonitor.db.v0.GetOne
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -18,6 +19,10 @@ class AccountViewModel(
         _accounts = accountQueries.getAll().executeAsList()
             .also { _accounts = it }
         return _accounts
+    }
+
+    fun getAccount(id: Long): GetOne? {
+        return accountQueries.getOne(id).executeAsOneOrNull()
     }
 
     @OptIn(ExperimentalTime::class)
