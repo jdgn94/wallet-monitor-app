@@ -7,7 +7,7 @@ object LocalResource {
     object Icons {
         val plus = Res.drawable.plus
         val minus = Res.drawable.minus
-        val delete = Res.drawable.delete
+        val delete_keyboard = Res.drawable.delete_keyboard
         object Arrows {
             val forward = Res.drawable.arrow_forward
             val enter = Res.drawable.enter

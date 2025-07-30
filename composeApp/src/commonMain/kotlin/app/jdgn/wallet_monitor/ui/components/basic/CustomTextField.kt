@@ -1,0 +1,134 @@
+package app.jdgn.wallet_monitor.ui.components.basic
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import app.jdgn.wallet_monitor.theme.backgroundDark
+import app.jdgn.wallet_monitor.theme.backgroundLight
+import app.jdgn.wallet_monitor.ui.LocalResource.Icons
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Preview
+@Composable
+fun CustomTextField(
+    label: String = "Text",
+    value: String = "",
+    onChangeValue: (String) -> Unit = {},
+    margin: PaddingValues = PaddingValues(),
+    maxWidthDp: Dp = 10000.dp,
+    widthFraction: Float = 1f,
+    singleLine: Boolean = true,
+    minLines: Int = 1,
+    maxLines:  Int = if (singleLine) 1 else Int.MAX_VALUE,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    textStyle: TextStyle = LocalTextStyle.current,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    prefix: @Composable (() -> Unit)? = null,
+    suffix: @Composable (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    focusColor: Color = MaterialTheme.colorScheme.primary,
+    helperText: String? = "null",
+    errorText: String? = null
+) {
+    val errorColor = MaterialTheme.colorScheme.error
+
+    Column{
+        CustomBox(
+            margin = margin,
+            padding = PaddingValues(0.dp),
+            maxWidthDp = maxWidthDp,
+            widthFraction = widthFraction,
+            color =
+                if (errorText.isNullOrEmpty())
+                    backgroundLight
+                else
+                    backgroundDark
+        ) {
+            TextField(
+                value = value,
+                onValueChange = { onChangeValue(it) },
+                label = { Text(label) },
+                singleLine = singleLine,
+                minLines = minLines,
+                maxLines = maxLines,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                enabled = enabled,
+                readOnly = readOnly,
+                textStyle = textStyle,
+                placeholder = placeholder,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                prefix = prefix,
+                suffix = suffix,
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent, // Hides the indicator when focused
+                    unfocusedIndicatorColor = Color.Transparent, // Hides the indicator when unfocused
+                    disabledIndicatorColor = Color.Transparent, // Hides the indicator when disabled
+                    errorIndicatorColor = Color.Transparent, // Hides the indicator when in error state
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedLabelColor = focusColor,
+                    focusedContainerColor = focusColor.copy(alpha = 0.2f),
+                    errorTextColor = errorColor,
+                    errorContainerColor = errorColor.copy(alpha = 0.2f),
+                ),
+                isError = errorText != null
+            )
+        }
+        if (!helperText.isNullOrEmpty() && errorText.isNullOrEmpty())
+            Row {
+                Icon(
+                    painter = painterResource(Icons.delete),
+                    contentDescription = "info",
+                    modifier = Modifier.padding(start = 16.dp).size(16.dp)
+                )
+                Text(
+                    text = helperText,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+        if (!errorText.isNullOrEmpty())
+            Row {
+                Icon(
+                    painter = painterResource(Icons.plus),
+                    contentDescription = "error",
+                    tint = errorColor,
+                    modifier = Modifier.padding(start = 16.dp).size(16.dp)
+                )
+                Text(
+                    text = errorText,
+                    color = errorColor,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+    }
+}
