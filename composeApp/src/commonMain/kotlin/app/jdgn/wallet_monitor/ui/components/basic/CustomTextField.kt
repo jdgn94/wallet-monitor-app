@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -55,8 +57,8 @@ fun CustomTextField(
     suffix: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    focusColor: Color = MaterialTheme.colorScheme.primary,
-    helperText: String? = "null",
+    color: Color = MaterialTheme.colorScheme.primary,
+    helperText: String? = null,
     errorText: String? = null
 ) {
     val errorColor = MaterialTheme.colorScheme.error
@@ -68,12 +70,13 @@ fun CustomTextField(
             maxWidthDp = maxWidthDp,
             widthFraction = widthFraction,
             color =
-                if (errorText.isNullOrEmpty())
-                    backgroundLight
+                if (!errorText.isNullOrEmpty())
+                    errorColor
                 else
-                    backgroundDark
+                    color
         ) {
             TextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = value,
                 onValueChange = { onChangeValue(it) },
                 label = { Text(label) },
@@ -96,8 +99,8 @@ fun CustomTextField(
                     disabledIndicatorColor = Color.Transparent, // Hides the indicator when disabled
                     errorIndicatorColor = Color.Transparent, // Hides the indicator when in error state
                     unfocusedContainerColor = Color.Transparent,
-                    focusedLabelColor = focusColor,
-                    focusedContainerColor = focusColor.copy(alpha = 0.2f),
+                    focusedLabelColor = color,
+                    focusedContainerColor = color.copy(alpha = 0.2f),
                     errorTextColor = errorColor,
                     errorContainerColor = errorColor.copy(alpha = 0.2f),
                 ),
@@ -105,9 +108,11 @@ fun CustomTextField(
             )
         }
         if (!helperText.isNullOrEmpty() && errorText.isNullOrEmpty())
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Icon(
-                    painter = painterResource(Icons.delete),
+                    painter = painterResource(Icons.delete_keyboard),
                     contentDescription = "info",
                     modifier = Modifier.padding(start = 16.dp).size(16.dp)
                 )
@@ -117,7 +122,9 @@ fun CustomTextField(
                 )
             }
         if (!errorText.isNullOrEmpty())
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            )  {
                 Icon(
                     painter = painterResource(Icons.plus),
                     contentDescription = "error",

@@ -29,7 +29,6 @@ fun Modifier.dottedBorder(
             is Outline.Rounded -> {
                 Path().apply { addRoundRect(outline.roundRect) }
             }
-            else -> Path()
         }
         val stroke = Stroke(
             width = strokeWidth.toPx(),

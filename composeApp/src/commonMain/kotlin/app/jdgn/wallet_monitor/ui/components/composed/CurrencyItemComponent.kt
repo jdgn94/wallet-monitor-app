@@ -22,12 +22,16 @@ import app.walletmonitor.db.v0.Currencies
 
 @Composable
 fun CurrencyItemComponent(
+    modifier: Modifier = Modifier,
     currency: Currencies,
     selected: Boolean = false,
     maxWidthDp: Dp = 200.dp,
     margin: PaddingValues = PaddingValues(3.dp),
     padding: PaddingValues = PaddingValues(6.dp),
     widthFraction: Float = 0.33333334f,
+    color: Color = MaterialTheme.colorScheme.primary,
+    pickWidth: Dp? = null,
+    minusWidthFraction: Dp = 0.dp,
     onSelect: ((Currencies) -> Unit)? = null
 ) {
     val currencyDeprecated = (currency.currencyTypeId == 1.toLong() && currency.countries == "[]")
@@ -37,12 +41,20 @@ fun CurrencyItemComponent(
     }
 
     CustomBox(
+        modifier = modifier,
+        pickWidth = pickWidth,
         margin = margin,
         padding = padding,
-        maxWidthDp = maxWidthDp,
+        minusWidthFraction = minusWidthFraction,
         widthFraction = widthFraction,
+        maxWidthDp = maxWidthDp,
+        color = if (currencyDeprecated) {
+            MaterialTheme.colorScheme.error
+        }else {
+            color
+        },
         backgroundColor = if (selected) {
-            MaterialTheme.colorScheme.primary
+            color
         } else if (currencyDeprecated) {
             MaterialTheme.colorScheme.error
         } else {

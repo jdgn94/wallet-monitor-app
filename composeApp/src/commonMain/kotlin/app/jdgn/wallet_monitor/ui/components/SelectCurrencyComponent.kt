@@ -19,7 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.jdgn.wallet_monitor.ui.components.basic.DialogBasic
@@ -39,8 +42,16 @@ import walletmonitor.composeapp.generated.resources.selectCurrency
 @Preview
 @Composable
 fun SelectCurrencyComponent(
+    modifier: Modifier = Modifier,
+    margin: PaddingValues = PaddingValues(horizontal = 15.dp, vertical = 10.dp),
+    padding: PaddingValues = PaddingValues(6.dp),
+    pickWidth: Dp? = null,
+    maxWidthDp: Dp = 300.dp,
+    minusWidthFraction: Dp = 0.dp,
+    widthFraction: Float = 0.5f,
     defaultCurrencySelectId: Long? = null,
     changeDefaultCurrency: Boolean = false,
+    color: Color = MaterialTheme.colorScheme.primary,
     changeCurrency: ((currency: Currencies) -> Unit)? = null
 ) {
     val defaultSelectionName = stringResource(Res.string.selectCurrency)
@@ -48,8 +59,11 @@ fun SelectCurrencyComponent(
     val scope = rememberCoroutineScope() // scope coroutine
     val showDialog = remember { mutableStateOf(false) } // dialog state
     val currencies = remember { mutableStateOf(emptyList<Currencies>()) } // list currencies
-    var visibleCharCount by remember { mutableStateOf(0) } // state to animate deprecate currency
+    val visibleCharCount = remember { mutableStateOf(0) } // state to animate deprecate currency
     val deprecatedText = stringResource(Res.string.currencyDeprecated)
+    val page = remember { mutableStateOf(0) }
+    val hasMore = remember { mutableStateOf(true) }
+    val isLoading = remember { mutableStateOf(false) }
     val currencySelect = remember {
         mutableStateOf(Currencies(
             id = 0,
@@ -64,9 +78,20 @@ fun SelectCurrencyComponent(
         ))
     }
 
-    fun getCurrencies(name: String = "") {
+    fun getCurrencies(name: String = "", reset: Boolean = false) {
+        if (isLoading.value || !hasMore.value) return
+        isLoading.value = true
         scope.launch {
-            currencies.value = viewModel.getAllByNameAndType(name, 1)
+            val nextPage = if (reset) 0 else page.value
+            val result = viewModel.getAllByNameAndType(name, currencyTypeId = 1, nextPage)
+            if (reset) {
+                currencies.value = result
+            } else {
+                currencies.value = currencies.value + result
+            }
+            hasMore.value = result.isNotEmpty()
+            if (result.isNotEmpty()) page.value = nextPage + 1
+            isLoading.value = false
         }
     }
 
@@ -80,21 +105,24 @@ fun SelectCurrencyComponent(
     // Effect to animate text
     LaunchedEffect(currencySelect.value) {
         // Reset animation on change currency
-        visibleCharCount = 0
+        visibleCharCount.value = 0
 
         // if currency is deprecated, start de animation
         if (currencySelect.value.currencyTypeId == 1.toLong() && currencySelect.value.countries == "[]") {
             // animate al character one by one
             for (i in 1..deprecatedText.length) {
-                visibleCharCount = i
+                visibleCharCount.value = i
                 delay(50)
             }
         }
     }
 
     fun openCloseDialog() {
-        println("hello from selectCurrencyComponent")
-        getCurrencies()
+        if (!showDialog.value) {
+            page.value = 0
+            hasMore.value = true
+            getCurrencies(reset = true)
+        }
         showDialog.value = !showDialog.value
     }
 
@@ -108,8 +136,9 @@ fun SelectCurrencyComponent(
     }
 
     fun searchCurrency(value: String) {
-        println("search currency by $value")
-        getCurrencies(value)
+        page.value = 0
+        hasMore.value = true
+        getCurrencies(name = value, reset = true)
     }
 
     Column(
@@ -117,16 +146,21 @@ fun SelectCurrencyComponent(
         verticalArrangement = Arrangement.Center,
     ) {
         CurrencyItemComponent(
+            modifier = modifier,
             currency = currencySelect.value,
-            margin = PaddingValues(horizontal = 15.dp, vertical = 10.dp),
-            widthFraction = 0.5f,
-            maxWidthDp = 300.dp,
+            padding = padding,
+            pickWidth = pickWidth,
+            minusWidthFraction = minusWidthFraction,
+            margin = margin,
+            color = color,
+            widthFraction = widthFraction,
+            maxWidthDp = maxWidthDp,
             onSelect = { openCloseDialog() }
         )
         // Text animated for deprecated currency
         if (currencySelect.value.currencyTypeId == 1.toLong() && currencySelect.value.countries == "[]") {
             AnimatedContent(
-                targetState = deprecatedText.take(visibleCharCount),
+                targetState = deprecatedText.take(visibleCharCount.value),
                 transitionSpec = {
                     fadeIn(animationSpec = tween(150)) togetherWith
                             fadeOut(animationSpec = tween(150))
@@ -148,10 +182,14 @@ fun SelectCurrencyComponent(
         title = Res.string.selectCurrency,
         showActions = true,
         cancelText = Res.string.close,
+        onScrollNearEnd = { // <-- Nuevo callback
+            getCurrencies()
+        },
         content = {
             currencies.value.forEach { currency ->
                 CurrencyItemComponent(
-                    currency,
+                    currency = currency,
+                    color = color,
                     selected = currency.id == currencySelect.value.id,
                     onSelect = { selectCurrency(it) }
                 )

@@ -45,6 +45,8 @@ kotlin {
 
             implementation(libs.androidx.navigation.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.compose.colorpicker)
+
             api(libs.datastore.preferences)
             api(libs.datastore)
 

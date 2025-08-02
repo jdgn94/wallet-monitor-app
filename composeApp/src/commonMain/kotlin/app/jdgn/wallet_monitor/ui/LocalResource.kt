@@ -24,9 +24,6 @@ object LocalResource {
             val home = Res.drawable.home_outlined
         }
     }
-    object Texts {
-        val app_name = Res.string.app_name
-    }
     object Images {
         val app_icon = Res.drawable.app_icon_image
         val bank = Res.drawable.bank_image

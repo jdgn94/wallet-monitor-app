@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Expense Monitor</string>
+    <string name="appName">Expense Monitor</string>
     <!--  welcome screens  -->
     <string name="bankInfoWelcome">You can create all the accounts you need from the bank you need.</string>
     <string name="reportInfoWelcome">Keep track of your expenses and income.\nYou can also view graphs to analyze them.</string>
@@ -16,6 +16,7 @@
     <string name="selectTheme">Select theme</string>
     <string name="currencyDeprecated">This currency is no longer used</string>
     <string name="confirm">OK</string>
+    <string name="save">Save</string>
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
     <!-- bottom bar -->
@@ -38,7 +39,21 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="feedback">Feedback</string>
+    <!-- forms -->
+    <string name="name">Name</string>
+    <string name="nameNoEmpty">The name cannot be empty</string>
+    <string name="amount">Amount</string>
+    <string name="color">Color</string>
+    <string name="currency">Currency</string>
+    <string name="description">Description</string>
+    <string name="bank">Bank</string>
+    <string name="none">None</string>
     <!-- messages -->
+    <string name="accountCreated">Account created with success</string>
+    <string name="accountUpdated">Account updated with success</string>
+    <string name="emptyField">Empty field</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
     <string name="confirmExit">Confirm Exit</string>
     <string name="confirmExitMessage">Are you sure you want to go back?</string>
     <!-- options -->

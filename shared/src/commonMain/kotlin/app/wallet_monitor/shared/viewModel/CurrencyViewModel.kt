@@ -45,7 +45,9 @@ class CurrencyViewModel(
 
     fun getAllByNameAndType(
         name: String,
-        currencyTypeId: Long
+        currencyTypeId: Long,
+        page: Int,
+        pageSize: Int = 20
     ): List<Currencies> {
         val currencies = currencyQueries
             .getAllByNameAndType(
@@ -53,7 +55,9 @@ class CurrencyViewModel(
                 value__ = "%$name%",
                 value___ = "%$name%",
                 value____ = "%$name%",
-                currencyTypeId = currencyTypeId
+                currencyTypeId = currencyTypeId,
+                value_____ = pageSize.toLong(),
+                value______ = (page * pageSize).toLong()
             ).executeAsList()
 
         return currencies

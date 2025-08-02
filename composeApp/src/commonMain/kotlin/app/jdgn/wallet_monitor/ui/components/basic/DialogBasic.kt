@@ -35,14 +35,24 @@ fun DialogBasic(
     onConfirmRequest: (() -> Unit)? = null,
     searchAction: ((String) -> Unit)? = null,
     title: StringResource,
-    content: @Composable (() -> Unit),
     showActions: Boolean = true,
     confirmText: StringResource = Res.string.confirm,
     cancelText: StringResource = Res.string.cancel,
+    onScrollNearEnd: (() -> Unit)? = null,
+    content: @Composable () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val maxWidth = getScreenWidth() * 0.8f
     val maxHeight = getScreenHeight() * 0.7f
+    val threshold = 100 // pixels to end scroll
+
+    LaunchedEffect(scrollState.value) {
+        if (scrollState.maxValue > 0 &&
+            scrollState.value >= scrollState.maxValue - threshold
+        ) {
+            onScrollNearEnd?.invoke()
+        }
+    }
 
     fun onConfirmAndDismissRequest() {
         onConfirmRequest?.invoke()

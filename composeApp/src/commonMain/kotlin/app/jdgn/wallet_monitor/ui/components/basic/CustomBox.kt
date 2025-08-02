@@ -29,21 +29,22 @@ fun CustomBox(
     padding: PaddingValues = PaddingValues(16.dp),
     margin: PaddingValues = PaddingValues(),
     color: Color = MaterialTheme.colorScheme.primary,
+    minusWidthFraction: Dp = 0.dp,
     backgroundColor: Color? = null,
     onClick: (() -> Unit)? = null,
     widthFraction: Float = 0.5f,
     maxWidthDp: Dp = 300.dp,
+    contentAlignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.() -> Unit
 ) {
     // Get screen width
     val screenWidth = getScreenWidth()
 
     // Calculate width 50%
-    val boxWidth = pickWidth ?: (screenWidth * widthFraction).coerceAtMost(maxWidthDp)
+    val boxWidth = pickWidth ?: ((screenWidth * widthFraction).coerceAtMost(maxWidthDp) - minusWidthFraction)
 
     Box(
         modifier = Modifier
-            .widthIn(max = 200.dp)
             .padding(margin)
             .shadow(
                 elevation = 8.dp,
@@ -69,7 +70,7 @@ fun CustomBox(
                     .background(backgroundColor?.copy(alpha = 0.2f) ?: MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
                     .padding(padding),
-                contentAlignment = Alignment.Center,
+                contentAlignment = contentAlignment,
                 content = content
             )
         }

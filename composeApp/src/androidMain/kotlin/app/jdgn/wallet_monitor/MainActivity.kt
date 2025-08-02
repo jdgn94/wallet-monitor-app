@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun attachBaseContext(newBase: Context) {
         val languageCode = runBlocking { userPreferences.getString(APP_LANGUAGE_KEY).firstOrNull() }
         val code = languageCode?.ifEmpty { getSystemLanguage() } ?: getSystemLanguage()
-        val locale = Locale(code)
+        val locale = Locale(/* language = */ code)
         val config = Configuration(newBase.resources.configuration)
 
         super.attachBaseContext(ContextWrapper(newBase.createConfigurationContext(config)))

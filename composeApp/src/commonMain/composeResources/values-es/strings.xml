@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Expense Monitor</string>
+    <string name="appName">Expense Monitor</string>
     <!--  welcome screens  -->
     <string name="bankInfoWelcome">Podras crear todas las cuentas que necesites del banco que necesites.</string>
     <string name="reportInfoWelcome">Lleva un registro de tus gastos e ingresos.\nTambien podras obtener graficos para poder analizarlos.</string>
@@ -16,6 +16,7 @@
     <string name="selectTheme">Seleccionar tema</string>
     <string name="currencyDeprecated">Esta moneda ya no es usada</string>
     <string name="confirm">OK</string>
+    <string name="save">Guardar</string>
     <string name="close">Cerrar</string>
     <string name="cancel">Cancelar</string>
     <!-- bottom bar-->
@@ -34,13 +35,27 @@
     <string name="persons">Personas</string>
     <string name="pin">Pin</string>
     <string name="biometric">Biometrico</string>
-    <string name="face_id">Face ID</string>
+    <string name="faceId">Face ID</string>
     <string name="settings">Configuraciones</string>
     <string name="about">Acerca de</string>
     <string name="feedback">Sugerencias</string>
+    <!-- forms -->
+    <string name="name">Nombre</string>
+    <string name="nameNoEmpty">El nombre no puede estar vacio</string>
+    <string name="amount">Monto</string>
+    <string name="color">Color</string>
+    <string name="currency">Moneda</string>
+    <string name="description">Descripcion</string>
+    <string name="bank">Banco</string>
+    <string name="none">Ninguno</string>
     <!-- messages -->
-    <string name="confirm_exit">Confirmar Salida</string>
-    <string name="confirm_exit_message">¿Estas seguro que quieres salir?</string>
+    <string name="accountCreated">Cuenta creada con exito</string>
+    <string name="accountUpdated">Cuenta actualizada con exito</string>
+    <string name="emptyField">Campo vacio</string>
+    <string name="success">Exito</string>
+    <string name="error">Error</string>
+    <string name="confirmExit">Confirmar Salida</string>
+    <string name="confirmExitMessage">¿Estas seguro que quieres salir?</string>
     <!-- options -->
     <string name="yes">Si</string>
     <string name="no">No</string>

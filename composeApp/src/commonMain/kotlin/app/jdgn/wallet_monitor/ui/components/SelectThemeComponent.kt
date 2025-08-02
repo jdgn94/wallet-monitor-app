@@ -6,11 +6,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import app.jdgn.wallet_monitor.ui.components.basic.ButtonAddItem
 import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
+import app.jdgn.wallet_monitor.ui.components.basic.CustomRow
 import app.jdgn.wallet_monitor.ui.components.basic.DialogBasic
+import app.jdgn.wallet_monitor.ui.components.composed.AccountItemComponent
 import app.wallet_monitor.shared.APP_THEME_KEY
 import app.wallet_monitor.shared.GlobalStateManager
+import app.wallet_monitor.shared.viewModel.AccountViewModel
 import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel

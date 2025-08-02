@@ -10,6 +10,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -22,10 +23,11 @@ fun NavBar(
     navController: NavHostController,
     title: String,
     backButton: Boolean = true,
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+            containerColor = color.copy(alpha = 0.1f),
         ),
         navigationIcon = {
             if (backButton)
