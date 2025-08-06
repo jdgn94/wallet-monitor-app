@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import app.wallet_monitor.db.WalletMonitorDB
 import app.wallet_monitor.shared.repository.DataInitializer
 import app.wallet_monitor.shared.viewModel.AccountViewModel
+import app.wallet_monitor.shared.viewModel.BankViewModel
 import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import app.wallet_monitor.shared.viewModel.LanguageViewModel
 import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
@@ -25,6 +26,7 @@ val viewModelModules = module {
     viewModelOf(::LanguageViewModel)
     viewModelOf(::UserPreferenceViewModel)
     viewModelOf(::AccountViewModel)
+    viewModelOf(::BankViewModel)
 }
 
 expect val nativeModules: Module

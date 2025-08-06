@@ -13,7 +13,7 @@ class AccountViewModel(
     private var _accounts: List<GetAll> = listOf()
 
     fun getAccounts(): List<GetAll> {
-        if (!_accounts.isEmpty())
+        if (_accounts.isNotEmpty())
             return _accounts
 
         _accounts = accountQueries.getAll().executeAsList()

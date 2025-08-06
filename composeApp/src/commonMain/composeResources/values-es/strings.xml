@@ -47,6 +47,7 @@
     <string name="currency">Moneda</string>
     <string name="description">Descripcion</string>
     <string name="bank">Banco</string>
+    <string name="selectBank">Seleccionar Banco</string>
     <string name="none">Ninguno</string>
     <!-- messages -->
     <string name="accountCreated">Cuenta creada con exito</string>

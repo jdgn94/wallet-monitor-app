@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import app.jdgn.wallet_monitor.ui.components.SelectBankComponent
 import app.jdgn.wallet_monitor.ui.components.SelectCurrencyComponent
 import app.jdgn.wallet_monitor.ui.components.basic.ColorPicker
 import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
@@ -30,6 +31,7 @@ import app.jdgn.wallet_monitor.utils.colorToHex
 import app.jdgn.wallet_monitor.utils.hexStringToColor
 import app.wallet_monitor.shared.viewModel.AccountViewModel
 import app.wallet_monitor.shared.viewModel.CurrencyViewModel
+import app.walletmonitor.db.v0.Banks
 import app.walletmonitor.db.v0.Currencies
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,8 +49,9 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
     val viewModelAccount = koinViewModel<AccountViewModel>()
     val viewModelCurrency = koinViewModel<CurrencyViewModel>()
     val accountId = rememberSaveable { mutableStateOf(id ?: 0L) }
-    val amount = rememberSaveable { mutableStateOf(0.0) }
     val colorString = rememberSaveable { mutableStateOf("#FF5C6BC0") }
+    val amount = rememberSaveable { mutableStateOf(0.0) }
+    val bankId = rememberSaveable { mutableStateOf(0L) }
     val color = remember { mutableStateOf<Color>(hexStringToColor(colorString.value)) }
     val name = rememberSaveable { mutableStateOf("") }
     val currency = remember { mutableStateOf(viewModelCurrency.getDefaultCurrency()!!) }
@@ -72,6 +75,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                 launch {
                     name.value = accountResult.name
                     amount.value = accountResult.amount
+                    bankId.value = accountResult.bankId ?: 0L
                     delay(10)
                     onChangeColor(accountResult.color)
                     onChangeCurrency(viewModelCurrency.getOneById(accountResult.currencyId)!!)
@@ -91,6 +95,8 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
         }
         nameError.value = true
     }
+
+    fun changeBank(bank: Banks) {}
 
     Scaffold(
         topBar = {
@@ -132,35 +138,17 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                     color = color.value,
                     margin = PaddingValues(0.dp),
                     minusWidthFraction = 24.dp,
-                    maxWidthDp = 10000.dp,
                     widthFraction = 0.5f,
                     changeCurrency = { onChangeCurrency(it) }
                 )
-                CustomBox(
+                SelectBankComponent(
                     color = color.value,
                     margin = PaddingValues(0.dp),
-                    padding = PaddingValues(14.dp),
+                    padding = PaddingValues(16.dp),
                     minusWidthFraction = 24.dp,
-                    maxWidthDp = 10000.dp,
                     widthFraction = 0.5f,
-                    contentAlignment = Alignment.CenterStart,
-                    onClick = { navController.navigate("bank/") }
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        verticalArrangement = Arrangement.Top
-                    ) {
-                        Text(
-                            text = stringResource(Res.string.bank),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                        )
-                        Text(
-                            text = stringResource(Res.string.none),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    }
-                }
+                    onSelectBank = { changeBank(it) }
+                )
             }
         }
     }

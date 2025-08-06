@@ -47,6 +47,7 @@
     <string name="currency">Currency</string>
     <string name="description">Description</string>
     <string name="bank">Bank</string>
+    <string name="selectBank">Select Bank</string>
     <string name="none">None</string>
     <!-- messages -->
     <string name="accountCreated">Account created with success</string>
