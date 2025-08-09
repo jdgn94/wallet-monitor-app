@@ -104,7 +104,7 @@ fun CustomTextField(
                     errorTextColor = errorColor,
                     errorContainerColor = errorColor.copy(alpha = 0.2f),
                 ),
-                isError = errorText != null
+                isError = !errorText.isNullOrEmpty()
             )
         }
         if (!helperText.isNullOrEmpty() && errorText.isNullOrEmpty())

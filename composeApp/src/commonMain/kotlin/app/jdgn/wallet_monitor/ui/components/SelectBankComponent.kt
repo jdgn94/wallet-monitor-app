@@ -39,23 +39,47 @@ fun SelectBankComponent(
     onSelectBank: ((bank: Banks) -> Unit)
 ) {
     val viewModel = koinViewModel<BankViewModel>() // view model
-    val banks = viewModel.getBanks() // list banks
-    val bankSelect = remember { mutableStateOf(banks.find { it.id == defaultBankSelectId }) } // selected bank
-    val showDialogList = remember { mutableStateOf(false) } // dialog state
-    val showDialogCreate = remember { mutableStateOf(false) } // dialog state
+    val banks = remember { mutableStateOf(viewModel.getBanks()) } // list banks
+    val bankSelect = remember { mutableStateOf(banks.value.find { it.id == defaultBankSelectId }) } // selected bank
+    val showDialog = remember { mutableStateOf(false) } // dialog state
 
     LaunchedEffect(defaultBankSelectId) {
-        bankSelect.value = banks.find { it.id == defaultBankSelectId }
+        bankSelect.value = banks.value.find { it.id == defaultBankSelectId }
     }
 
-    fun openCloseDialogList() {
-        showDialogList.value = !showDialogList.value
+    fun openCloseDialog() {
+        showDialog.value = !showDialog.value
     }
 
     fun selectBank(bank: Banks) {
         bankSelect.value = bank
-        openCloseDialogList()
+        openCloseDialog()
         onSelectBank(bank)
+    }
+
+    fun reloadBanks() {
+        banks.value = viewModel.getReloadBanks();
+    }
+
+    DialogBasic(
+        open = showDialog.value,
+        onDismissRequest = { openCloseDialog() },
+        title = Res.string.selectBank,
+        showActions = true,
+        cancelText = Res.string.close,
+    ) {
+        banks.value.forEach { bank ->
+            BankItemComponent(
+                modifier = modifier,
+                bank = bank,
+                padding = padding,
+                margin = PaddingValues(3.dp),
+                widthFraction = 0.3333334f,
+                backgroundColor = backgroundColor,
+                onClick = { selectBank(bank) }
+            )
+        }
+        CreateEditBankComponent(reloadComponent = { reloadBanks() })
     }
 
     BankItemComponent(
@@ -70,28 +94,6 @@ fun SelectBankComponent(
         maxWidthDp = maxWidthDp,
         contentAlignment = contentAlignment,
         minusWidthFraction = minusWidthFraction,
-        onClick = { openCloseDialogList() },
+        onClick = { openCloseDialog() },
     )
-
-    DialogBasic(
-        open = showDialogList.value,
-        onDismissRequest = { openCloseDialogList() },
-        title = Res.string.selectBank,
-        showActions = true,
-        cancelText = Res.string.close,
-    ) {
-        banks.forEach { bank ->
-            BankItemComponent(
-                modifier = modifier,
-                bank = bank,
-                padding = padding,
-                margin = margin,
-                backgroundColor = backgroundColor,
-                onClick = {  }
-            )
-        }
-        ButtonAddItem(
-            onClick = {  },
-        )
-    }
 }

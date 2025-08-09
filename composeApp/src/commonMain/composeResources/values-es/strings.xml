@@ -17,6 +17,7 @@
     <string name="currencyDeprecated">Esta moneda ya no es usada</string>
     <string name="confirm">OK</string>
     <string name="save">Guardar</string>
+    <string name="create">Crear</string>
     <string name="close">Cerrar</string>
     <string name="cancel">Cancelar</string>
     <!-- bottom bar-->
@@ -48,6 +49,8 @@
     <string name="description">Descripcion</string>
     <string name="bank">Banco</string>
     <string name="selectBank">Seleccionar Banco</string>
+    <string name="createBank">Crear Banco</string>
+    <string name="updateBank">Actualizar Banco</string>
     <string name="none">Ninguno</string>
     <!-- messages -->
     <string name="accountCreated">Cuenta creada con exito</string>

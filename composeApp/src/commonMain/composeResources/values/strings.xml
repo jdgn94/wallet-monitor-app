@@ -17,6 +17,7 @@
     <string name="currencyDeprecated">This currency is no longer used</string>
     <string name="confirm">OK</string>
     <string name="save">Save</string>
+    <string name="create">Create</string>
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
     <!-- bottom bar -->
@@ -48,6 +49,8 @@
     <string name="description">Description</string>
     <string name="bank">Bank</string>
     <string name="selectBank">Select Bank</string>
+    <string name="createBank">Create Bank</string>
+    <string name="updateBank">Update Bank</string>
     <string name="none">None</string>
     <!-- messages -->
     <string name="accountCreated">Account created with success</string>

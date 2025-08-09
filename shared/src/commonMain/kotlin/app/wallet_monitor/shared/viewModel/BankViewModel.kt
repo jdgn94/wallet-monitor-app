@@ -18,6 +18,11 @@ class BankViewModel(
         return _banks
     }
 
+    fun getReloadBanks(): List<Banks> {
+        _banks = bankQueries.getAll().executeAsList()
+        return _banks
+    }
+
     fun createBank(
         name: String,
         image: String? = null
@@ -25,6 +30,18 @@ class BankViewModel(
         bankQueries.insert(
             name = name,
             image = image
+        )
+    }
+
+    fun updateBank(
+        id: Long,
+        name: String,
+        image: String? = null
+    ) {
+        bankQueries.update(
+            name = name,
+            image = image,
+            id = id
         )
     }
 }
