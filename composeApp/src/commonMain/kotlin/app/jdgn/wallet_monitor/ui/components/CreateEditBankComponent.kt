@@ -1,9 +1,14 @@
 package app.jdgn.wallet_monitor.ui.components
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import app.jdgn.wallet_monitor.ui.components.basic.ButtonAddItem
 import app.jdgn.wallet_monitor.ui.components.basic.CustomTextField
 import app.jdgn.wallet_monitor.ui.components.basic.DialogBasic
@@ -12,18 +17,23 @@ import app.walletmonitor.db.v0.Banks
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import walletmonitor.composeapp.generated.resources.Res
+import walletmonitor.composeapp.generated.resources.bank
 import walletmonitor.composeapp.generated.resources.cancel
 import walletmonitor.composeapp.generated.resources.close
 import walletmonitor.composeapp.generated.resources.create
 import walletmonitor.composeapp.generated.resources.createBank
 import walletmonitor.composeapp.generated.resources.name
 import walletmonitor.composeapp.generated.resources.nameNoEmpty
+import walletmonitor.composeapp.generated.resources.none
 import walletmonitor.composeapp.generated.resources.save
 import walletmonitor.composeapp.generated.resources.updateBank
 
 @Composable
 fun CreateEditBankComponent(
     bank: Banks? = null,
+    padding: PaddingValues = PaddingValues(16.dp),
+    margin: PaddingValues = PaddingValues(3.dp),
+    widthFraction: Float = 0.5f,
     reloadComponent: (() -> Unit)? = null
 ) {
     val viewModel = koinViewModel<BankViewModel>() // view model
@@ -83,6 +93,19 @@ fun CreateEditBankComponent(
     }
 
     ButtonAddItem(
+        padding = padding,
+        margin = margin,
+        widthFraction = widthFraction,
         onClick = { openCloseDialog() },
-    )
+    ) {
+        Text(
+            text = "",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+        )
+        Text(
+            text = "",
+            style = MaterialTheme.typography.titleMedium,
+        )
+    }
 }

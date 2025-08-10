@@ -50,6 +50,7 @@ fun AccountItemComponent(
         pickWidth = 150.dp,
         color = color,
         margin = margin,
+        padding = PaddingValues(0.dp),
         onClick = { onClick(account.id) }
     ) {
         Box(
@@ -61,12 +62,12 @@ fun AccountItemComponent(
                 ),
                 contentDescription = "cash",
                 modifier = Modifier
-                    .offset(x = 70.dp, y = (-12).dp)
+                    .align(Alignment.TopEnd)
                     .size(60.dp)
                     .rotate(20f)
                     .alpha(0.35f)
             )
-            Column {
+            Column(modifier = Modifier.padding(12.dp)) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {

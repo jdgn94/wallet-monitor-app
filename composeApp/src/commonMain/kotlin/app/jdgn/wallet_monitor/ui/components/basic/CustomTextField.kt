@@ -59,7 +59,8 @@ fun CustomTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     color: Color = MaterialTheme.colorScheme.primary,
     helperText: String? = null,
-    errorText: String? = null
+    errorText: String? = null,
+    onClick: (() -> Unit)? = null
 ) {
     val errorColor = MaterialTheme.colorScheme.error
 
@@ -69,6 +70,7 @@ fun CustomTextField(
             padding = PaddingValues(0.dp),
             maxWidthDp = maxWidthDp,
             widthFraction = widthFraction,
+            onClick = if (!enabled) null else onClick,
             color =
                 if (!errorText.isNullOrEmpty())
                     errorColor
@@ -86,7 +88,7 @@ fun CustomTextField(
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
                 enabled = enabled,
-                readOnly = readOnly,
+                readOnly = if (onClick != null) true else readOnly,
                 textStyle = textStyle,
                 placeholder = placeholder,
                 leadingIcon = leadingIcon,

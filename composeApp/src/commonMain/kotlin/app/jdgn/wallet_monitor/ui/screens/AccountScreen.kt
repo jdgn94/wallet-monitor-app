@@ -27,6 +27,7 @@ import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
 import app.jdgn.wallet_monitor.ui.components.basic.CustomColumn
 import app.jdgn.wallet_monitor.ui.components.basic.CustomTextField
 import app.jdgn.wallet_monitor.ui.components.basic.NavBar
+import app.jdgn.wallet_monitor.ui.components.composed.NumberKeyboard
 import app.jdgn.wallet_monitor.utils.colorToHex
 import app.jdgn.wallet_monitor.utils.hexStringToColor
 import app.wallet_monitor.shared.viewModel.AccountViewModel
@@ -48,28 +49,26 @@ import walletmonitor.composeapp.generated.resources.none
 fun AccountScreen(navController: NavHostController, id: Long? = null) {
     val viewModelAccount = koinViewModel<AccountViewModel>()
     val viewModelCurrency = koinViewModel<CurrencyViewModel>()
-    val accountId = rememberSaveable { mutableStateOf(id ?: 0L) }
-    val colorString = rememberSaveable { mutableStateOf("#FF5C6BC0") }
-    val amount = rememberSaveable { mutableStateOf(0.0) }
-    val bankId = rememberSaveable { mutableStateOf(0L) }
-    val color = remember { mutableStateOf<Color>(hexStringToColor(colorString.value)) }
-    val name = rememberSaveable { mutableStateOf("") }
+    val accountId = remember { mutableStateOf(id ?: 0L) }
+    val amount = remember { mutableStateOf(0.0) }
+    val bankId = remember { mutableStateOf(0L) }
+    val color = remember { mutableStateOf<Color>(hexStringToColor("#FF5C6BC0")) }
+    val name = remember { mutableStateOf("") }
     val currency = remember { mutableStateOf(viewModelCurrency.getDefaultCurrency()!!) }
-    val currencyId = rememberSaveable { mutableStateOf(currency.value.id) }
-    val nameError = rememberSaveable { mutableStateOf(false) }
+    val currencyId = remember { mutableStateOf(currency.value.id) }
+    val nameError = remember { mutableStateOf(false) }
 
     fun onChangeCurrency(value: Currencies) {
         currency.value = value
-        currencyId.value = value.id
     }
 
-    fun onChangeColor(value: String) {
-        colorString.value = value
-        color.value = hexStringToColor(value)
+    fun onChangeColor(value: Color) {
+
+        color.value = value
     }
 
     LaunchedEffect(true) {
-        if (id != null && name.value.isEmpty()) {
+        if (id != null) {
             val accountResult = viewModelAccount.getAccount(id)
             if (accountResult != null) {
                 launch {
@@ -77,13 +76,10 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                     amount.value = accountResult.amount
                     bankId.value = accountResult.bankId ?: 0L
                     delay(10)
-                    onChangeColor(accountResult.color)
+                    onChangeColor(hexStringToColor(accountResult.color))
                     onChangeCurrency(viewModelCurrency.getOneById(accountResult.currencyId)!!)
                 }
             }
-        } else if (id != null && name.value.isNotEmpty()) {
-            onChangeColor(colorString.value)
-            onChangeCurrency(viewModelCurrency.getOneById(currencyId.value)!!)
         }
     }
 
@@ -96,7 +92,9 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
         nameError.value = true
     }
 
-    fun changeBank(bank: Banks) {}
+    fun changeBank(bank: Banks) {
+        bankId.value = bank.id
+    }
 
     Scaffold(
         topBar = {
@@ -126,7 +124,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                 initialColor = color.value,
                 maxWidthDp = 10000.dp,
                 widthFraction = 1f,
-                changeColor = { onChangeColor(colorToHex(it)) }
+                changeColor = { onChangeColor(it) }
             )
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
@@ -146,10 +144,18 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                     margin = PaddingValues(0.dp),
                     padding = PaddingValues(16.dp),
                     minusWidthFraction = 24.dp,
+                    bankSelectId = bankId.value,
                     widthFraction = 0.5f,
                     onSelectBank = { changeBank(it) }
                 )
             }
+            NumberKeyboard(
+                margin = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                color = color.value,
+                currency = currency.value,
+                amount = amount.value,
+                updateAmount = { amount.value = it }
+            )
         }
     }
 }

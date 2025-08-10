@@ -34,6 +34,7 @@ fun DialogBasic(
     onDismissRequest: (() -> Unit),
     onConfirmRequest: (() -> Unit)? = null,
     searchAction: ((String) -> Unit)? = null,
+    closeOnConfirm: Boolean = false,
     title: StringResource,
     showActions: Boolean = true,
     confirmText: StringResource = Res.string.confirm,
@@ -55,6 +56,8 @@ fun DialogBasic(
     }
 
     fun onConfirmAndDismissRequest() {
+        if (closeOnConfirm)
+            onDismissRequest()
         onConfirmRequest?.invoke()
     }
 

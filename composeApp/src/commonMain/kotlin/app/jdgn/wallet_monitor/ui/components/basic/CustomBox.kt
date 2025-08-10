@@ -31,10 +31,10 @@ fun CustomBox(
     color: Color = MaterialTheme.colorScheme.primary,
     minusWidthFraction: Dp = 0.dp,
     backgroundColor: Color? = null,
-    onClick: (() -> Unit)? = null,
     widthFraction: Float = 0.5f,
     maxWidthDp: Dp = 300.dp,
     contentAlignment: Alignment = Alignment.Center,
+    onClick: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit
 ) {
     // Get screen width

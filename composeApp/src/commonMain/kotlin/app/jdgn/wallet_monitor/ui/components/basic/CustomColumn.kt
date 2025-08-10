@@ -31,9 +31,6 @@ fun CustomColumn(
     content: @Composable () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    val edgeHeight = 16.dp
-    val density = LocalDensity.current
-    var edgeFraction by remember { mutableStateOf(0.1f) }
 
     Box(modifier = modifier) {
         Column(
@@ -45,26 +42,6 @@ fun CustomColumn(
             content()
             Box(modifier = Modifier.height(16.dp))
         }
-
-//        Box(
-//            modifier = Modifier
-//                .matchParentSize()
-//                .onGloballyPositioned { coordinates ->
-//                    val totalHeightPx = coordinates.size.height.toFloat()
-//                    val edgeHeightPx = with(density) { edgeHeight.toPx() }
-//                    edgeFraction = totalHeightPx / edgeHeightPx
-//                }
-//                .background(
-//                    brush = Brush.verticalGradient(
-//                        colorStops = arrayOf(
-//                            0.0f to MaterialTheme.colorScheme.onSurface,
-//                            edgeFraction to Color.Transparent,
-//                            1f - edgeFraction to Color.Transparent,
-//                            1.0f to MaterialTheme.colorScheme.onSurface
-//                        )
-//                    )
-//                )
-//        )
         Box(
             modifier = Modifier
                 .height(16.dp)

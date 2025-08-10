@@ -34,17 +34,17 @@ fun SelectBankComponent(
     maxWidthDp: Dp = 300.dp,
     contentAlignment: Alignment = Alignment.CenterStart,
     minusWidthFraction: Dp = 0.dp,
-    defaultBankSelectId: Long? = null,
+    bankSelectId: Long? = null,
     changeDefaultBank: Boolean = false,
     onSelectBank: ((bank: Banks) -> Unit)
 ) {
     val viewModel = koinViewModel<BankViewModel>() // view model
     val banks = remember { mutableStateOf(viewModel.getBanks()) } // list banks
-    val bankSelect = remember { mutableStateOf(banks.value.find { it.id == defaultBankSelectId }) } // selected bank
+    val bankSelect = remember { mutableStateOf(banks.value.find { it.id == bankSelectId }) } // selected bank
     val showDialog = remember { mutableStateOf(false) } // dialog state
 
-    LaunchedEffect(defaultBankSelectId) {
-        bankSelect.value = banks.value.find { it.id == defaultBankSelectId }
+    LaunchedEffect(bankSelectId) {
+        bankSelect.value = banks.value.find { it.id == bankSelectId }
     }
 
     fun openCloseDialog() {
@@ -71,15 +71,21 @@ fun SelectBankComponent(
         banks.value.forEach { bank ->
             BankItemComponent(
                 modifier = modifier,
+                color = color,
                 bank = bank,
                 padding = padding,
-                margin = PaddingValues(3.dp),
+                margin = PaddingValues(2.dp),
                 widthFraction = 0.3333334f,
-                backgroundColor = backgroundColor,
+                backgroundColor = if (bank.id == bankSelectId) color else backgroundColor,
                 onClick = { selectBank(bank) }
             )
         }
-        CreateEditBankComponent(reloadComponent = { reloadBanks() })
+        CreateEditBankComponent(
+            padding = padding,
+            widthFraction = 0.3333334f,
+            margin = PaddingValues(2.dp),
+            reloadComponent = { reloadBanks() }
+        )
     }
 
     BankItemComponent(

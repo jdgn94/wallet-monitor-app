@@ -67,6 +67,7 @@ fun ColorPicker(
     fun openCloseDialog() {
         showDialog.value = !showDialog.value
     }
+
     CustomBox(
         modifier = modifier,
         color = initialColor,
@@ -102,6 +103,7 @@ fun ColorPicker(
         showActions = true,
         cancelText = Res.string.close,
         confirmText = Res.string.save,
+        closeOnConfirm = true,
         onConfirmRequest = { changeColor(internalColor.value) },
         content = {
             Box(
