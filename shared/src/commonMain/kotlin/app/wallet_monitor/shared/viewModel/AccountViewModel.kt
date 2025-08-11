@@ -21,6 +21,11 @@ class AccountViewModel(
         return _accounts
     }
 
+    fun getReloadAccounts(): List<GetAll> {
+        _accounts = accountQueries.getAll().executeAsList()
+        return _accounts
+    }
+
     fun getAccount(id: Long): GetOne? {
         return accountQueries.getOne(id).executeAsOneOrNull()
     }
@@ -40,6 +45,26 @@ class AccountViewModel(
             color = color,
             name = name,
             updatedAt = Clock.System.now().toString(),
+        )
+    }
+
+    @OptIn(ExperimentalTime::class)
+    fun updateAccount(
+        id: Long,
+        currencyId: Long,
+        bankId: Long? = null,
+        amount: Double,
+        color: String,
+        name: String
+    ) {
+        accountQueries.update(
+            currencyId = currencyId,
+            bankId = bankId,
+            amount = amount,
+            color = color,
+            name = name,
+            updatedAt = Clock.System.now().toString(),
+            id = id
         )
     }
 }

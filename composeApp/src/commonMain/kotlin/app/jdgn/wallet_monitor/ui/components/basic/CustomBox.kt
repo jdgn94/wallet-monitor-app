@@ -31,6 +31,7 @@ fun CustomBox(
     color: Color = MaterialTheme.colorScheme.primary,
     minusWidthFraction: Dp = 0.dp,
     backgroundColor: Color? = null,
+    backgroundFullColor: Boolean = false,
     widthFraction: Float = 0.5f,
     maxWidthDp: Dp = 300.dp,
     contentAlignment: Alignment = Alignment.Center,
@@ -67,7 +68,7 @@ fun CustomBox(
             Box(
                 modifier = modifier
                     .width(pickWidth ?: boxWidth)
-                    .background(backgroundColor?.copy(alpha = 0.2f) ?: MaterialTheme.colorScheme.surface)
+                    .background(backgroundColor?.copy(alpha = if (backgroundFullColor) 1f else 0.2f) ?: MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
                     .padding(padding),
                 contentAlignment = contentAlignment,

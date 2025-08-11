@@ -30,6 +30,7 @@ object LocalResource {
             val edit = Res.drawable.edit_filled
             val more = Res.drawable.more_circle_filled
             val save = Res.drawable.save_filled
+            val cancel = Res.drawable.cancel_filled
             val category = Res.drawable.category_filled
         }
         object Outlined {
@@ -39,6 +40,7 @@ object LocalResource {
             val edit = Res.drawable.edit_outlined
             val more = Res.drawable.more_circle_outlined
             val save = Res.drawable.save_outlined
+            val cancel = Res.drawable.cancel_outlined
             val category = Res.drawable.category_outlined
         }
     }

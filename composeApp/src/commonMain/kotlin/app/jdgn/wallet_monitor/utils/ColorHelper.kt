@@ -11,5 +11,10 @@ fun hexStringToColor(hexString: String): Color {
 }
 
 fun colorToHex(color: Color): String {
-    return "#${color.value.toUInt().toString(16).uppercase().padStart(8, '0')}"
+    val red = (color.red * 255).toInt()
+    val green = (color.green * 255).toInt()
+    val blue = (color.blue * 255).toInt()
+    val alpha = (color.alpha * 255).toInt()
+
+    return "#${alpha.toString(16).padStart(2, '0')}${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${blue.toString(16).padStart(2, '0')}".uppercase()
 }

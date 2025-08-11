@@ -5,12 +5,9 @@ import kotlin.math.pow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,9 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import app.jdgn.wallet_monitor.theme.extraColor
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons
 import app.jdgn.wallet_monitor.ui.components.basic.AdaptiveText
@@ -38,16 +33,14 @@ import app.jdgn.wallet_monitor.utils.formatNumber
 import app.walletmonitor.db.v0.Currencies
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import walletmonitor.composeapp.generated.resources.Res
 import walletmonitor.composeapp.generated.resources.amount
-import walletmonitor.composeapp.generated.resources.confirm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun NumberKeyboard(
+fun NumberKeyboardComponent(
     margin: PaddingValues = PaddingValues(),
     color: Color = MaterialTheme.colorScheme.primary,
     amount: Double = 0.0,

@@ -12,6 +12,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -114,7 +115,10 @@ fun DialogBasic(
                                     value = searchText,
                                     onValueChange = { setSearchText(it) },
                                     singleLine = true,
-                                    textStyle = MaterialTheme.typography.headlineSmall,
+                                    textStyle = MaterialTheme.typography.headlineSmall.copy(
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    ),
+                                    cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                                     modifier = Modifier
                                         .weight(1f)
                                         .focusRequester(focusRequester)
@@ -132,7 +136,7 @@ fun DialogBasic(
                                 Text(
                                     text = stringResource(title),
                                     style = MaterialTheme.typography.headlineSmall,
-                                    modifier = Modifier.weight(1f)
+                                    modifier = Modifier.weight(1f),
                                 )
                                 if (searchAction != null) {
                                     TextButton(onClick = { changeSearchState() }) {

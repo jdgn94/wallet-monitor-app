@@ -43,6 +43,19 @@ INSERT INTO
 VALUES
     (?, ?, ?, ?, ?, ?);
 
+update:
+UPDATE
+    accounts
+SET
+    currencyId = ?,
+    bankId = ?,
+    amount = ?,
+    color = ?,
+    name = ?,
+    updatedAt = ?
+WHERE
+    id = ?;
+
 getOne:
 SELECT
     a.id,

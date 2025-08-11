@@ -20,6 +20,7 @@
     <string name="create">Crear</string>
     <string name="close">Cerrar</string>
     <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
     <!-- bottom bar-->
     <string name="home">Inicio</string>
     <string name="transactions">Transacciones</string>

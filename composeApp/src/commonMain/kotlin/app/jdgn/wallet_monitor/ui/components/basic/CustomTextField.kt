@@ -96,6 +96,7 @@ fun CustomTextField(
                 prefix = prefix,
                 suffix = suffix,
                 colors = TextFieldDefaults.colors(
+                    cursorColor = color,
                     focusedIndicatorColor = Color.Transparent, // Hides the indicator when focused
                     unfocusedIndicatorColor = Color.Transparent, // Hides the indicator when unfocused
                     disabledIndicatorColor = Color.Transparent, // Hides the indicator when disabled
