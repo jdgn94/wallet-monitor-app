@@ -24,8 +24,10 @@ import walletmonitor.composeapp.generated.resources.delete
 @Composable
 fun ActionButtonComponent(
     margin: PaddingValues = PaddingValues(bottom = 8.dp),
+    padding: PaddingValues = PaddingValues(8.dp),
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
     color: Color = MaterialTheme.colorScheme.onSurface,
+    shadowColor: Color = if (backgroundColor == MaterialTheme.colorScheme.surface)  color else backgroundColor,
     icon: Painter = painterResource(Outlined.delete),
     iconDescription: String = "Delete",
     text: String = "Text",
@@ -33,7 +35,9 @@ fun ActionButtonComponent(
 ) {
     CustomBox(
         margin = margin,
+        padding = padding,
         backgroundColor = backgroundColor,
+        color = shadowColor,
         backgroundFullColor = true,
         minusWidthFraction = 20.dp,
         onClick = onClick

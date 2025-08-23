@@ -201,6 +201,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                 ActionButtonComponent(
                     backgroundColor = MaterialTheme.colorScheme.extraColor.success.color,
                     color = MaterialTheme.colorScheme.extraColor.success.onColor,
+                    shadowColor = color.value,
                     icon = painterResource(Outlined.save),
                     iconDescription = "Save",
                     text = stringResource(Res.string.save),
@@ -209,6 +210,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                 ActionButtonComponent(
                     color = MaterialTheme.colorScheme.error,
                     icon = painterResource(Outlined.cancel),
+                    shadowColor = color.value,
                     iconDescription = "Cancel",
                     text = stringResource(Res.string.cancel),
                     onClick = { navController.popBackStack() }
@@ -216,6 +218,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                 ActionButtonComponent(
                     backgroundColor = MaterialTheme.colorScheme.error,
                     color = MaterialTheme.colorScheme.onError,
+                    shadowColor = color.value,
                     icon = painterResource(Outlined.delete),
                     iconDescription = "Delete",
                     text = stringResource(Res.string.delete),

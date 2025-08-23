@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import app.jdgn.wallet_monitor.theme.backgroundDark
 import app.jdgn.wallet_monitor.theme.backgroundLight
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -63,6 +65,18 @@ fun CustomTextField(
     onClick: (() -> Unit)? = null
 ) {
     val errorColor = MaterialTheme.colorScheme.error
+    val colors = TextFieldDefaults.colors(
+        cursorColor = color,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+        errorIndicatorColor = Color.Transparent,
+        unfocusedContainerColor = Color.Transparent,
+        focusedLabelColor = color,
+        focusedContainerColor = color.copy(alpha = 0.2f),
+        errorTextColor = errorColor,
+        errorContainerColor = errorColor.copy(alpha = 0.2f),
+    )
 
     Column{
         CustomBox(
@@ -95,50 +109,51 @@ fun CustomTextField(
                 trailingIcon = trailingIcon,
                 prefix = prefix,
                 suffix = suffix,
-                colors = TextFieldDefaults.colors(
-                    cursorColor = color,
-                    focusedIndicatorColor = Color.Transparent, // Hides the indicator when focused
-                    unfocusedIndicatorColor = Color.Transparent, // Hides the indicator when unfocused
-                    disabledIndicatorColor = Color.Transparent, // Hides the indicator when disabled
-                    errorIndicatorColor = Color.Transparent, // Hides the indicator when in error state
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedLabelColor = color,
-                    focusedContainerColor = color.copy(alpha = 0.2f),
-                    errorTextColor = errorColor,
-                    errorContainerColor = errorColor.copy(alpha = 0.2f),
-                ),
+                colors = colors,
                 isError = !errorText.isNullOrEmpty()
             )
         }
-        if (!helperText.isNullOrEmpty() && errorText.isNullOrEmpty())
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(Icons.delete_keyboard),
-                    contentDescription = "info",
-                    modifier = Modifier.padding(start = 16.dp).size(16.dp)
-                )
-                Text(
-                    text = helperText,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-        if (!errorText.isNullOrEmpty())
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            )  {
-                Icon(
-                    painter = painterResource(Icons.plus),
-                    contentDescription = "error",
-                    tint = errorColor,
-                    modifier = Modifier.padding(start = 16.dp).size(16.dp)
-                )
-                Text(
-                    text = errorText,
-                    color = errorColor,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
+        if (!helperText.isNullOrEmpty() && errorText.isNullOrEmpty()) {
+            InfoTextRow(
+                text = helperText,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                icon = Icons.delete_keyboard,
+                contentDescription = "Info"
+            )
+        }
+        if (!errorText.isNullOrEmpty()) {
+            InfoTextRow(
+                text = errorText,
+                tint = errorColor,
+                icon = Icons.plus,
+                contentDescription = "Error"
+            )
+        }
+    }
+}
+
+@Composable
+private fun InfoTextRow(
+    text: String,
+    tint: Color,
+    icon: DrawableResource,
+    contentDescription: String
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(start = 16.dp)
+    ) {
+        Icon(
+            painter = painterResource(icon),
+            contentDescription = contentDescription,
+            tint = tint,
+            modifier = Modifier.size(16.dp)
+        )
+        Text(
+            text = text,
+            color = tint,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(start = 8.dp)
+        )
     }
 }

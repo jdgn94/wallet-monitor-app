@@ -1,16 +1,16 @@
 package app.wallet_monitor.shared
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import app.wallet_monitor.db.WalletMonitorDB
 import app.wallet_monitor.shared.repository.DataInitializer
 import app.wallet_monitor.shared.viewModel.AccountViewModel
 import app.wallet_monitor.shared.viewModel.BankViewModel
 import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import app.wallet_monitor.shared.viewModel.LanguageViewModel
+import app.wallet_monitor.shared.viewModel.NumberKeyboardViewModel
 import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
@@ -27,6 +27,7 @@ val viewModelModules = module {
     viewModelOf(::UserPreferenceViewModel)
     viewModelOf(::AccountViewModel)
     viewModelOf(::BankViewModel)
+    factoryOf(::NumberKeyboardViewModel)
 }
 
 expect val nativeModules: Module
