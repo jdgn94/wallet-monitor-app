@@ -1,3 +1,5 @@
+// Archivo: NumberKeyboardViewModel.kt
+
 package app.wallet_monitor.shared.viewModel
 
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +31,8 @@ class NumberKeyboardViewModel {
 
     private val _isCalculating = mutableStateOf(false)
     val isCalculating: State<Boolean> = _isCalculating
+    private val _isPendingCalculating = mutableStateOf(false)
+    val isPendingCalculating: State<Boolean> = _isPendingCalculating
 
     // Estados privados para la lógica interna
     private var currentOperator by mutableStateOf("")
@@ -82,13 +86,6 @@ class NumberKeyboardViewModel {
     }
 
     fun openSheet() {
-        // Inicialización y reseteo de la calculadora
-        val initialValue = (_amountCurrent.value * 10.0.pow(currentCurrency.decimalDigits.toDouble())).toLong().toString()
-        _amountTemp.value = if (initialValue == "0") "0" else initialValue
-        currentOperator = ""
-        _previousNumber = ""
-        _isCalculating.value = false
-        updateTempFormatted()
         _isSheetVisible.value = true
     }
 
@@ -160,6 +157,7 @@ class NumberKeyboardViewModel {
         }
         _previousNumber = _amountTemp.value
         currentOperator = operator
+        _isPendingCalculating.value = true
         _isCalculating.value = true
     }
 
@@ -180,6 +178,7 @@ class NumberKeyboardViewModel {
             updateAmountFormatted()
             closeSheet()
         }
+        _isPendingCalculating.value = false
     }
 
     private fun removeLastDigit() {

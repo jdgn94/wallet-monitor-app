@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.components.basic.CustomColumn
 import app.jdgn.wallet_monitor.ui.components.basic.CustomTextField
-import app.jdgn.wallet_monitor.ui.components.basic.NavBar
+import app.jdgn.wallet_monitor.ui.components.basic.TopBar
 import org.jetbrains.compose.resources.stringResource
 import walletmonitor.composeapp.generated.resources.Res
 import walletmonitor.composeapp.generated.resources.bank
@@ -35,12 +35,12 @@ fun BankScreen(navController: NavHostController, id: Long? = null) {
 
     Scaffold(
         topBar = {
-            NavBar(
+            TopBar(
                 navController = navController,
                 title = stringResource(Res.string.bank),
                 backButton = true,
             )
-        }
+        },
     ) { padding ->
         CustomColumn(modifier = Modifier.padding(padding)) {
             CustomTextField(

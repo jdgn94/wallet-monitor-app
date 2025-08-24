@@ -162,7 +162,7 @@ fun NumberKeyboardComponent(
                                     modifier = Modifier.size(24.dp)
                                 )
                                 "=" -> {
-                                    if (viewModel.isCalculating.value || viewModel.previousNumber.isNotEmpty())
+                                    if (viewModel.isPendingCalculating.value)
                                         Icon(
                                             painter = painterResource(Icons.equal),
                                             contentDescription = "equal",
@@ -176,7 +176,6 @@ fun NumberKeyboardComponent(
                                             tint = internalColor,
                                             modifier = Modifier.size(24.dp)
                                         )
-
                                 }
                                 else -> Text(
                                     text = value,

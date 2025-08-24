@@ -1,17 +1,13 @@
 package app.jdgn.wallet_monitor.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.theme.extraColor
@@ -27,10 +22,9 @@ import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Outlined
 import app.jdgn.wallet_monitor.ui.components.SelectBankComponent
 import app.jdgn.wallet_monitor.ui.components.SelectCurrencyComponent
 import app.jdgn.wallet_monitor.ui.components.basic.ColorPicker
-import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
 import app.jdgn.wallet_monitor.ui.components.basic.CustomColumn
 import app.jdgn.wallet_monitor.ui.components.basic.CustomTextField
-import app.jdgn.wallet_monitor.ui.components.basic.NavBar
+import app.jdgn.wallet_monitor.ui.components.basic.TopBar
 import app.jdgn.wallet_monitor.ui.components.composed.ActionButtonComponent
 import app.jdgn.wallet_monitor.ui.components.composed.NumberKeyboardComponent
 import app.jdgn.wallet_monitor.utils.colorToHex
@@ -46,12 +40,10 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import walletmonitor.composeapp.generated.resources.Res
 import walletmonitor.composeapp.generated.resources.account
-import walletmonitor.composeapp.generated.resources.bank
 import walletmonitor.composeapp.generated.resources.cancel
 import walletmonitor.composeapp.generated.resources.delete
 import walletmonitor.composeapp.generated.resources.name
 import walletmonitor.composeapp.generated.resources.nameNoEmpty
-import walletmonitor.composeapp.generated.resources.none
 import walletmonitor.composeapp.generated.resources.save
 
 @Composable
@@ -135,7 +127,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
 
     Scaffold(
         topBar = {
-            NavBar(
+            TopBar(
                 navController = navController,
                 title = stringResource(Res.string.account),
                 backButton = true,
