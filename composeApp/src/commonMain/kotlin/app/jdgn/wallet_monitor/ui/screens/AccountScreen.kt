@@ -166,16 +166,18 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                     margin = PaddingValues(0.dp),
                     minusWidthFraction = 20.dp,
                     widthFraction = 0.5f,
-                    changeCurrency = { onChangeCurrency(it) }
+                    changeCurrency = { onChangeCurrency(it) },
+                    height = 80.dp
                 )
                 SelectBankComponent(
                     color = color.value,
                     margin = PaddingValues(0.dp),
-                    padding = PaddingValues(16.dp),
+                    padding = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
                     minusWidthFraction = 20.dp,
                     bankSelectId = bankId.value,
                     widthFraction = 0.5f,
-                    onSelectBank = { changeBank(it) }
+                    onSelectBank = { changeBank(it) },
+                    height = 80.dp
                 )
             }
             NumberKeyboardComponent(

@@ -25,20 +25,26 @@ object LocalResource {
         }
         object Filled {
             val home = Res.drawable.home_filled
-            val chart = Res.drawable.chart_multiple_filled
+            val cashMoneyBill = Res.drawable.money_cash_bill_filled
+            val chartMultiple = Res.drawable.chart_multiple_filled
+            val chartDonut = Res.drawable.chart_donut_filled
+            val more = Res.drawable.more_filled
             val delete = Res.drawable.delete_filled
             val edit = Res.drawable.edit_filled
-            val more = Res.drawable.more_circle_filled
+            val moreCircle = Res.drawable.more_circle_filled
             val save = Res.drawable.save_filled
             val cancel = Res.drawable.cancel_filled
             val category = Res.drawable.category_filled
         }
         object Outlined {
             val home = Res.drawable.home_outlined
-            val cash = Res.drawable.chart_multiple_outlined
+            val cashMoneyBill = Res.drawable.money_cash_bill_outlined
+            val chartMultiple = Res.drawable.chart_multiple_outlined
+            val chartDonut = Res.drawable.chart_donut_outlined
+            val more = Res.drawable.more_outlined
             val delete = Res.drawable.delete_outlined
             val edit = Res.drawable.edit_outlined
-            val more = Res.drawable.more_circle_outlined
+            val moreCircle = Res.drawable.more_circle_outlined
             val save = Res.drawable.save_outlined
             val cancel = Res.drawable.cancel_outlined
             val category = Res.drawable.category_outlined

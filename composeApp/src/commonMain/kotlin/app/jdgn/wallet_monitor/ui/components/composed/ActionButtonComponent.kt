@@ -40,6 +40,7 @@ fun ActionButtonComponent(
         color = shadowColor,
         backgroundFullColor = true,
         minusWidthFraction = 20.dp,
+        splashColor = shadowColor,
         onClick = onClick
     ) {
         Column(

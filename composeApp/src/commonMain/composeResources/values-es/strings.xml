@@ -24,14 +24,15 @@
     <!-- bottom bar-->
     <string name="home">Inicio</string>
     <string name="transactions">Transacciones</string>
-    <string name="chart">Grafico</string>
+    <string name="chart">Gráfico</string>
     <string name="more">Mas</string>
     <!-- more screen -->
+    <string name="categories">Categorías</string>">
     <string name="movements">Movimientos</string>
     <string name="security">Seguridad</string>
     <string name="calendar">Calendario</string>
     <string name="goal">Meta</string>
-    <string name="expenses_income">Gastos e Ingresos</string>
+    <string name="expensesIncome">Gastos e Ingresos</string>
     <string name="accounts">Cuentas</string>
     <string name="account">Cuenta</string>
     <string name="persons">Personas</string>
