@@ -84,7 +84,7 @@ fun SplashScreen(navController: NavHostController) {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(LocalResource.Images.app_icon),
+                painter = painterResource(LocalResource.Images.appIcon),
                 contentDescription = "App Icon",
                 modifier = Modifier.scale(scale.value).size(150.dp)
             )

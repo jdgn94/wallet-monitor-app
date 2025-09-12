@@ -120,7 +120,7 @@ fun NumberKeyboardComponent(
                         ) {
                             when (value) {
                                 "backspace" -> Icon(
-                                    painter = painterResource(Icons.delete_keyboard),
+                                    painter = painterResource(Icons.deleteKeyboard),
                                     contentDescription = "delete_keyboard",
                                     tint = internalColor,
                                     modifier = Modifier.size(24.dp)
@@ -150,7 +150,7 @@ fun NumberKeyboardComponent(
                                     modifier = Modifier.size(24.dp)
                                 )
                                 "±" -> Icon(
-                                    painter = painterResource(Icons.plus_minus),
+                                    painter = painterResource(Icons.plusMinus),
                                     contentDescription = "plus_minus",
                                     tint = internalColor,
                                     modifier = Modifier.size(24.dp)

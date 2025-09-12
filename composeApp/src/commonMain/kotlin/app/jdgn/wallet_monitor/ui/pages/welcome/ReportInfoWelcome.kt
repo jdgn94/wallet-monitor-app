@@ -107,7 +107,7 @@ fun ReportInfoWelcome(isVisible: Boolean = true) {
 
             // image market analysis
             Image(
-                painter = painterResource(Images.market_analysis),
+                painter = painterResource(Images.marketAnalysis),
                 contentDescription = "Market Analysis Icon",
                 modifier = Modifier
                     .padding(start = 175.dp)
@@ -118,7 +118,7 @@ fun ReportInfoWelcome(isVisible: Boolean = true) {
 
             // Image pie chart
             Image(
-                painter = painterResource(Images.pie_chart),
+                painter = painterResource(Images.pieChart),
                 contentDescription = "Pie Chart Icon",
                 modifier = Modifier
                     .padding(top = 135.dp)

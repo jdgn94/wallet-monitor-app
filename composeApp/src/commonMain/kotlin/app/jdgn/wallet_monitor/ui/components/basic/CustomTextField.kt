@@ -117,7 +117,7 @@ fun CustomTextField(
             InfoTextRow(
                 text = helperText,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                icon = Icons.delete_keyboard,
+                icon = Icons.deleteKeyboard,
                 contentDescription = "Info"
             )
         }

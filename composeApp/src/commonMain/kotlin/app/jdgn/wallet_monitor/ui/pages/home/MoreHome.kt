@@ -8,10 +8,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import app.jdgn.wallet_monitor.ui.LocalResource
-import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
+import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Arrows
+import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Filled
+import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Calendar
 import app.jdgn.wallet_monitor.ui.components.composed.MoreOptionComponent
 import walletmonitor.composeapp.generated.resources.Res
 import walletmonitor.composeapp.generated.resources.about
@@ -35,51 +35,54 @@ fun MoreHome() {
         horizontalArrangement = Arrangement.SpaceAround,
     ) {
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.category,
             title = Res.string.categories,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.bank,
             title = Res.string.bank,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.invoice,
             title = Res.string.movements,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.lock,
             title = Res.string.security,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Calendar.default,
             title = Res.string.calendar,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.piggy,
             title = Res.string.goal,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.Person.default,
             title = Res.string.persons,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.config,
             title = Res.string.settings,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Arrows.sort,
             title = Res.string.expensesIncome,
+            maxWidthDp = 600.dp,
+            minusWidthFraction = 24.dp,
+            widthFraction = 1f
         )
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 8.dp),
             color = MaterialTheme.colorScheme.primary
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.info,
             title = Res.string.about,
         )
         MoreOptionComponent(
-            icon = LocalResource.Icons.Filled.category,
+            icon = Filled.feedback,
             title = Res.string.feedback,
         )
     }
