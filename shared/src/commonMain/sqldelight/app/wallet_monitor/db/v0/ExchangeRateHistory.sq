@@ -1,0 +1,20 @@
+CREATE TABLE exchangeRateHistories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    currencyId INTEGER NOT NULL,
+    exchangeRate REAL NOT NULL,
+    createdAt TEXT NOT NULL DEFAULT (strftime('%s', 'now')),
+    updatedAt TEXT NOT NULL,
+    FOREIGN KEY (currencyId) REFERENCES currencies(id) ON DELETE CASCADE
+);
+
+getAll:
+SELECT * FROM exchangeRateHistories;
+
+getByDate:
+SELECT
+    *
+FROM
+    exchangeRateHistories erh
+    INNER JOIN currencies c ON erh.currencyId = c.id
+WHERE
+    date(erh.createdAt) = date(?);

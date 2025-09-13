@@ -14,17 +14,6 @@ class CurrencyViewModel(
     private val currencyQueries: CurrencyQueries,
     private val userPreferences: UserPreferences
 ): ViewModel() {
-    private var _currencies: List<Currencies> = listOf()
-
-    fun getCurrencies(): List<Currencies> {
-        if (!_currencies.isEmpty())
-            return _currencies
-
-        currencyQueries.getAllByType(currencyTypeId = 1.toLong()).executeAsList()
-            .also { _currencies = it }
-        return _currencies
-    }
-
     fun getDefaultCurrency(): Currencies? {
         val currencyId = runBlocking { userPreferences.getInt(APP_CURRENCY_KEY).firstOrNull() }
         if (currencyId == null) return null

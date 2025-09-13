@@ -55,14 +55,18 @@
     <string name="updateBank">Actualizar Banco</string>
     <string name="none">Ninguno</string>
     <!-- messages -->
+    <string name="success">Exito</string>
+    <string name="info">Información</string>
+    <string name="warning">Advertencia</string>
+    <string name="error">Error</string>
     <string name="accountCreated">Cuenta creada con exito</string>
     <string name="accountUpdated">Cuenta actualizada con exito</string>
     <string name="emptyField">Campo vacio</string>
-    <string name="success">Exito</string>
-    <string name="error">Error</string>
     <string name="confirmExit">Confirmar Salida</string>
     <string name="confirmExitMessage">¿Estas seguro que quieres salir?</string>
     <!-- options -->
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <!-- categories -->
+    <string name="warningCategory">No hay categorías, son necesarias para poder crear transacciones y llevar un control de los gastos.</string>
 </resources>

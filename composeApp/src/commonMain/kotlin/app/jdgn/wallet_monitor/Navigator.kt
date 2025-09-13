@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.jdgn.wallet_monitor.ui.screens.AccountScreen
 import app.jdgn.wallet_monitor.ui.screens.BankScreen
+import app.jdgn.wallet_monitor.ui.screens.CategoriesScreen
 import app.jdgn.wallet_monitor.ui.screens.HomeScreen
 import app.jdgn.wallet_monitor.ui.screens.InitialConfigScreen
 import app.jdgn.wallet_monitor.ui.screens.SplashScreen
@@ -26,6 +27,7 @@ object Routes {
     const val HOME = "home"
     const val ACCOUNT = "account/{id}"
     const val BANK = "bank/{id}"
+    const val CATEGORIES = "categories"
 }
 
 @Composable
@@ -36,15 +38,19 @@ fun Navigation(modifier:Modifier = Modifier) {
         composable(route = Routes.SPLASH) {
             SplashScreen(navController)
         }
+
         composable(route = Routes.WELCOME) {
             WelcomeScreen(navController)
         }
+
         composable(route = Routes.INITIAL_CONFIG) {
             InitialConfigScreen(navController)
         }
+
         composable(route = Routes.HOME) {
             HomeScreen(navController)
         }
+
         composable(
             route = Routes.ACCOUNT,
             arguments = listOf(
@@ -71,6 +77,10 @@ fun Navigation(modifier:Modifier = Modifier) {
         ) { backStackEntry ->
             val id = backStackEntry.getArgumentString("id")?.toLongOrNull()
             BankScreen(navController, id)
+        }
+
+        composable(route = Routes.CATEGORIES) {
+            CategoriesScreen(navController)
         }
     }
 }

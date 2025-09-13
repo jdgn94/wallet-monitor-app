@@ -1,0 +1,38 @@
+CREATE TABLE categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL CHECK(LENGTH(name) <= 50),
+    description TEXT CHECK(LENGTH(description) <= 150),
+    icon TEXT NOT NULL,
+    color TEXT NOT NULL CHECK(LENGTH(color) <= 10),
+    createdAt TEXT NOT NULL DEFAULT (strftime('%s', 'now')),
+    updatedAt TEXT NOT NULL
+);
+
+getAllPaginate:
+SELECT
+    *
+FROM
+    categories
+WHERE
+    LOWER(name) LIKE ?
+ORDER BY name ASC
+LIMIT ?
+OFFSET ?;
+
+insert:
+INSERT INTO
+    categories(name, description, icon, color, updatedAt)
+VALUES
+    (?, ?, ?, ?, strftime('%s', 'now'));
+
+update:
+UPDATE
+    categories
+SET
+    name = ?,
+    description = ?,
+    icon = ?,
+    color = ?,
+    updatedAt = strftime('%s', 'now')
+WHERE
+    id = ?;

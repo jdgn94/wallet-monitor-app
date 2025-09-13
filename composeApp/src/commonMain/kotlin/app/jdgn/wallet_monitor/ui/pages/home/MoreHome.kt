@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Arrows
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Filled
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Calendar
@@ -27,7 +28,11 @@ import walletmonitor.composeapp.generated.resources.security
 import walletmonitor.composeapp.generated.resources.settings
 
 @Composable
-fun MoreHome() {
+fun MoreHome(navController: NavHostController) {
+    fun navigateTo(route: String) {
+        navController.navigate(route)
+    }
+
     FlowRow(
         modifier = Modifier
             .fillMaxSize()
@@ -37,6 +42,7 @@ fun MoreHome() {
         MoreOptionComponent(
             icon = Filled.category,
             title = Res.string.categories,
+            onClick = { navigateTo("categories") }
         )
         MoreOptionComponent(
             icon = Filled.bank,

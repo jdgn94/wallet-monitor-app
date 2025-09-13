@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.ui.components.basic.BottomBar
@@ -22,7 +22,7 @@ import app.jdgn.wallet_monitor.ui.pages.home.IndexHome
 import app.jdgn.wallet_monitor.ui.pages.home.MoreHome
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val currentPage = remember { mutableStateOf(0) }
+    val currentPage = rememberSaveable { mutableStateOf(0) }
 
     fun onChangePage(page: Int) {
         currentPage.value = page
@@ -60,7 +60,7 @@ fun HomeScreen(navController: NavHostController) {
                     0 -> IndexHome(navController)
                     1 -> AccountsHome()
                     2 -> ChatsHome()
-                    3 -> MoreHome()
+                    3 -> MoreHome(navController)
                 }
             }
 

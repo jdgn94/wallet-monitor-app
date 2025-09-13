@@ -8,6 +8,7 @@ import org.koin.core.component.KoinComponent
 import app.wallet_monitor.shared.db.seeders.Seeders
 import app.walletmonitor.db.v0.AccountQueries
 import app.walletmonitor.db.v0.BankQueries
+import app.walletmonitor.db.v0.CategoryQueries
 import app.walletmonitor.db.v0.CurrencyQueries
 import app.walletmonitor.db.v0.CurrencyTypeQueries
 import app.walletmonitor.db.v0.ExchangeRateQueries
@@ -25,6 +26,8 @@ class DataInitializer: KoinComponent {
     private val exchangeRates: ExchangeRateQueries by inject()
     private val banks: BankQueries by inject()
     private val accounts: AccountQueries by inject()
+    private val categories: CategoryQueries by inject()
+    private val subcategories: CategoryQueries by inject()
 
     // Inject user preferences
     val userPreferences: UserPreferences by inject()

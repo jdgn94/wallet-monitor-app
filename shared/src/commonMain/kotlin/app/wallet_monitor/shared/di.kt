@@ -4,9 +4,11 @@ import app.wallet_monitor.db.WalletMonitorDB
 import app.wallet_monitor.shared.repository.DataInitializer
 import app.wallet_monitor.shared.viewModel.AccountViewModel
 import app.wallet_monitor.shared.viewModel.BankViewModel
+import app.wallet_monitor.shared.viewModel.CategoryViewModel
 import app.wallet_monitor.shared.viewModel.CurrencyViewModel
 import app.wallet_monitor.shared.viewModel.LanguageViewModel
 import app.wallet_monitor.shared.viewModel.NumberKeyboardViewModel
+import app.wallet_monitor.shared.viewModel.SubcategoryViewModel
 import app.wallet_monitor.shared.viewModel.UserPreferenceViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -27,6 +29,8 @@ val viewModelModules = module {
     viewModelOf(::UserPreferenceViewModel)
     viewModelOf(::AccountViewModel)
     viewModelOf(::BankViewModel)
+    viewModelOf(::CategoryViewModel)
+    viewModelOf(::SubcategoryViewModel)
     factoryOf(::NumberKeyboardViewModel)
 }
 
@@ -39,6 +43,8 @@ val databaseModules = module {
     single { get<WalletMonitorDB>().exchangeRateQueries }
     single { get<WalletMonitorDB>().bankQueries }
     single { get<WalletMonitorDB>().accountQueries }
+    single { get<WalletMonitorDB>().categoryQueries }
+    single { get<WalletMonitorDB>().subcategoryQueries }
     single { UserPreferences(get()) }
 }
 

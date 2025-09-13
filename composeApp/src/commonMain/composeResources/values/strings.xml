@@ -55,14 +55,18 @@
     <string name="updateBank">Update Bank</string>
     <string name="none">None</string>
     <!-- messages -->
+    <string name="success">Success</string>
+    <string name="info">Info</string>
+    <string name="warning">Warning</string>
+    <string name="error">Error</string>
     <string name="accountCreated">Account created with success</string>
     <string name="accountUpdated">Account updated with success</string>
     <string name="emptyField">Empty field</string>
-    <string name="success">Success</string>
-    <string name="error">Error</string>
     <string name="confirmExit">Confirm Exit</string>
     <string name="confirmExitMessage">Are you sure you want to go back?</string>
     <!-- options -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <!-- categories -->
+    <string name="warningCategory">There are no categories, they are necessary to be able to create transactions and keep track of expenses.</string>
 </resources>
