@@ -54,6 +54,7 @@
     <string name="createBank">Crear Banco</string>
     <string name="updateBank">Actualizar Banco</string>
     <string name="none">Ninguno</string>
+    <string name="icon">Ícono</string>
     <!-- messages -->
     <string name="success">Exito</string>
     <string name="info">Información</string>
@@ -69,4 +70,5 @@
     <string name="no">No</string>
     <!-- categories -->
     <string name="warningCategory">No hay categorías, son necesarias para poder crear transacciones y llevar un control de los gastos.</string>
+    <string name="category">Categoría</string>
 </resources>

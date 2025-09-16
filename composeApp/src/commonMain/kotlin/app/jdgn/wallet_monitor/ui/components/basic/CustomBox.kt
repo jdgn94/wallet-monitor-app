@@ -34,7 +34,7 @@ fun CustomBox(
     modifier: Modifier = Modifier,
     pickWidth: Dp? = null,
     height: Dp? = null,
-    minHeight: Dp? = null,
+    minHeight: Dp = 60.dp,
     padding: PaddingValues = PaddingValues(16.dp),
     margin: PaddingValues = PaddingValues(),
     color: Color = MaterialTheme.colorScheme.primary,

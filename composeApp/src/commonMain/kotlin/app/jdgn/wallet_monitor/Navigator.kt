@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import app.jdgn.wallet_monitor.ui.screens.AccountScreen
 import app.jdgn.wallet_monitor.ui.screens.BankScreen
 import app.jdgn.wallet_monitor.ui.screens.CategoriesScreen
+import app.jdgn.wallet_monitor.ui.screens.CategoryScreen
 import app.jdgn.wallet_monitor.ui.screens.HomeScreen
 import app.jdgn.wallet_monitor.ui.screens.InitialConfigScreen
 import app.jdgn.wallet_monitor.ui.screens.SplashScreen
@@ -28,6 +29,7 @@ object Routes {
     const val ACCOUNT = "account/{id}"
     const val BANK = "bank/{id}"
     const val CATEGORIES = "categories"
+    const val CATEGORY = "category/{id}"
 }
 
 @Composable
@@ -81,6 +83,20 @@ fun Navigation(modifier:Modifier = Modifier) {
 
         composable(route = Routes.CATEGORIES) {
             CategoriesScreen(navController)
+        }
+
+        composable(
+            route = Routes.CATEGORY,
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) { backStackEntry ->
+            val id = backStackEntry.getArgumentString("id")?.toLongOrNull()
+            CategoryScreen(navController, id)
         }
     }
 }

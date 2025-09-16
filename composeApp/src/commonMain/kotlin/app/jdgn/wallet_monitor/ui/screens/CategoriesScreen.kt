@@ -61,7 +61,7 @@ fun CategoriesScreen(navController: NavHostController) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateTo("category") }
+                onClick = { navigateTo("category/") }
             ) {
                 Icon(
                     painter = painterResource(LocalResource.Icons.plus),

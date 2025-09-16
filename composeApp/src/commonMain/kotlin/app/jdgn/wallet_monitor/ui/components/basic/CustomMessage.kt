@@ -26,7 +26,12 @@ enum class MessageType {
 
 @Preview
 @Composable
-fun CustomMessage(title: String, message: String, type: MessageType = MessageType.INFO, icon: Painter? = null) {
+fun CustomMessage(
+    title: String,
+    message: String,
+    type: MessageType = MessageType.INFO,
+    icon: Painter? = null
+) {
     val color = when (type) {
         MessageType.INFO -> MaterialTheme.colorScheme.extraColor.info.color
         MessageType.SUCCESS -> MaterialTheme.colorScheme.extraColor.success.color
