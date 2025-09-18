@@ -97,7 +97,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
         bankId.value = bank.id
     }
 
-    fun saveAccount() {
+    fun save() {
         if (name.value.isEmpty()) {
             nameError.value = true
             return
@@ -199,7 +199,7 @@ fun AccountScreen(navController: NavHostController, id: Long? = null) {
                     icon = painterResource(Outlined.save),
                     iconDescription = "Save",
                     text = stringResource(Res.string.save),
-                    onClick = { saveAccount() }
+                    onClick = { save() }
                 )
                 ActionButtonComponent(
                     color = MaterialTheme.colorScheme.error,

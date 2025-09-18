@@ -71,4 +71,13 @@
     <!-- categories -->
     <string name="warningCategory">No hay categorías, son necesarias para poder crear transacciones y llevar un control de los gastos.</string>
     <string name="category">Categoría</string>
+    <string name="subcategory">Subcategoría</string>
+    <string name="subcategories">Subcategorías</string>
+    <string name="categoryCreated">Categoría creada con exito</string>
+    <string name="categoryUpdated">Categoría actualizada con exito</string>
+    <string name="categoryDeleted">Categoría eliminada con exito</string>
+    <string name="subcategoryCreated">Subcategoría creada con exito</string>
+    <string name="subcategoryUpdated">Subcategoría actualizada con exito</string>
+    <string name="subcategoryDeleted">Subcategoría eliminada con exito</string>
+
 </resources>

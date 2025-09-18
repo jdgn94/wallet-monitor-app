@@ -71,4 +71,12 @@
     <!-- categories -->
     <string name="warningCategory">There are no categories, they are necessary to be able to create transactions and keep track of expenses.</string>
     <string name="category">Category</string>
+    <string name="subcategory">Subcategory</string>
+    <string name="subcategories">Subcategories</string>
+    <string name="categoryCreated">Category created with success</string>
+    <string name="categoryUpdated">Category updated with success</string>
+    <string name="categoryDeleted">Category deleted with success</string>
+    <string name="subcategoryCreated">Subcategory created with success</string>
+    <string name="subcategoryUpdated">Subcategory updated with success</string>
+    <string name="subcategoryDeleted">Subcategory deleted with success</string>
 </resources>
