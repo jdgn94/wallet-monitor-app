@@ -7,20 +7,30 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.jdgn.wallet_monitor.theme.darkProfitGreenColor
 import app.jdgn.wallet_monitor.theme.extraColor
+import app.jdgn.wallet_monitor.ui.LocalResource
 import app.jdgn.wallet_monitor.ui.LocalResource.Icons.Outlined
+import app.jdgn.wallet_monitor.ui.components.CreateEditSubcategory
 import app.jdgn.wallet_monitor.ui.components.basic.ButtonAddItem
 import app.jdgn.wallet_monitor.ui.components.basic.ColorPicker
 import app.jdgn.wallet_monitor.ui.components.basic.CustomColumn
@@ -28,6 +38,7 @@ import app.jdgn.wallet_monitor.ui.components.basic.CustomTextField
 import app.jdgn.wallet_monitor.ui.components.basic.IconSelector
 import app.jdgn.wallet_monitor.ui.components.basic.TopBar
 import app.jdgn.wallet_monitor.ui.components.composed.ActionButtonComponent
+import app.jdgn.wallet_monitor.ui.components.composed.SubcategoryItemComponent
 import app.jdgn.wallet_monitor.utils.generateRandomColorHex
 import app.jdgn.wallet_monitor.utils.hexStringToColor
 import app.wallet_monitor.shared.viewModel.CategoryViewModel
@@ -55,6 +66,8 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
     val description = remember { mutableStateOf("") }
     val color = remember { mutableStateOf(generateRandomColorHex()) }
     val subcategories = remember { mutableStateOf<List<Subcategories>>(listOf()) }
+    val dialogSubcategory = remember { mutableStateOf(false) }
+    val subcategorySelected = remember { mutableStateOf<Subcategories?>(null) }
 
     fun changeName(value: String) {
         name.value = value
@@ -65,12 +78,37 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
     }
 
     fun openSubcategory(subcategory: Subcategories? = null) {
+        subcategorySelected.value = subcategory
+        dialogSubcategory.value = true
+    }
 
+    fun closeSubcategory() {
+        dialogSubcategory.value = false
+    }
+
+    fun successSubcategory(subcategory: Subcategories) {
+        println("Estoy creando la subcategoria: $subcategory")
+        val subcategoryOnList = subcategories.value.find { it.id == subcategory.id }
+        if (subcategoryOnList != null) {
+            subcategories.value = subcategories.value.map {
+                if (it.id == subcategory.id) subcategory else it
+            }
+        } else {
+            subcategories.value = subcategories.value + subcategory
+        }
     }
 
     fun save() {}
 
     fun delete() {}
+
+    CreateEditSubcategory(
+        open = dialogSubcategory.value,
+        subcategory = subcategorySelected.value,
+        color = color.value,
+        onDismissRequest = { closeSubcategory() },
+        onSuccess = { successSubcategory(it) }
+    )
 
     Scaffold(
         topBar = {
@@ -125,14 +163,34 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
             HorizontalDivider(color = color.value, modifier = Modifier.padding(horizontal = 16.dp))
 
             FlowRow(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
+                subcategories.value.forEach {
+                    SubcategoryItemComponent(
+                        subcategory = it,
+                        minusWidthFraction = 32.dp,
+                        margin = PaddingValues(bottom = 8.dp),
+                        onClick = { openSubcategory(it) }
+                    )
+                }
                 ButtonAddItem(
                     color = color.value,
+                    minusWidthFraction = 32.dp,
+                    margin = PaddingValues(bottom = 8.dp),
                     onClick = { openSubcategory() }
-                ){}
+                ){
+                    Icon(
+                        modifier = Modifier
+                            .size(60.dp)
+                            .rotate(20f)
+                            .alpha(0f),
+                        painter = painterResource(Outlined.bank),
+                        contentDescription = "",
+                        tint = color.value,
+                    )
+                }
             }
 
             FlowRow(
