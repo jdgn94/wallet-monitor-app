@@ -119,8 +119,10 @@ object LocalResource {
         val birthdayCake2 = Res.drawable.birthday_cake_2_image
         val bycicle = Res.drawable.bycicle_image
         var bycicle2 = Res.drawable.bycicle_2_image
+        var bus = Res.drawable.bus_image
         val cake = Res.drawable.cake_image
         val cakeSlice = Res.drawable.cake_slice_image
+        val car = Res.drawable.car_image
         val card = Res.drawable.contactless_image
         val carRepair = Res.drawable.car_repair_image
         val cargoBike = Res.drawable.cargo_bike_image
@@ -196,6 +198,7 @@ object LocalResource {
         val report = Res.drawable.report
         val restaurant = Res.drawable.restaurant_image
         val school = Res.drawable.school_image
+        val schoolBus = Res.drawable.school_bus_image
         val shampoo = Res.drawable.shampoo_image
         val simCard = Res.drawable.sim_card_image
         val siren = Res.drawable.siren_image
