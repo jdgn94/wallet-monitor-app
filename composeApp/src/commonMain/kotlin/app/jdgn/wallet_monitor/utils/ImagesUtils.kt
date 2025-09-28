@@ -3,7 +3,7 @@ package app.jdgn.wallet_monitor.utils
 import app.jdgn.wallet_monitor.ui.LocalResource.Images
 import org.jetbrains.compose.resources.DrawableResource
 
-val celebrations: List<String> = listOf(
+val categoryCelebrations: List<String> = listOf(
     "birthdayCake", "birthdayCake2", "christmasTree", "christmasWreath", "discoBall", "gift",
     "gift2", "partyHat", "partyPopper"
 )
@@ -24,7 +24,7 @@ val categoryFood: List<String> = listOf(
     "healthyDrink", "restaurant", "sweets"
 )
 
-val categoryPurchases: List<String> = listOf(
+val categoryShopping: List<String> = listOf(
     "beautyProduct", "groceryCart", "beer", "diet", "liquor", "petToy", "petFood", "shampoo",
     "waterBottle", "wine"
 )

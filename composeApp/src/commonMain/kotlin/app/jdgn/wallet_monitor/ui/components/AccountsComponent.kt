@@ -25,7 +25,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun AccountsComponent(navController: NavHostController) {
     val viewModel = koinViewModel<AccountViewModel>()
-    val allAccounts = remember { mutableStateOf(viewModel.getAccounts()) }
+        val allAccounts = remember { mutableStateOf(viewModel.getAccounts()) }
 
     // Listen for navigation changes and refresh data
     val navBackStackEntry by navController.currentBackStackEntryAsState()

@@ -79,4 +79,20 @@
     <string name="subcategoryCreated">Subcategory created with success</string>
     <string name="subcategoryUpdated">Subcategory updated with success</string>
     <string name="subcategoryDeleted">Subcategory deleted with success</string>
+    <string name="selectIcon">Select Icon</string>
+    <string name="celebration">Celebration</string>
+    <string name="food">Food</string>
+    <string name="transport">Transport</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="shopping">Shopping</string>
+    <string name="travel">Travel</string>
+    <string name="technology">Technology</string>
+    <string name="service">Service</string>
+    <string name="education">Education</string>
+    <string name="other">Other</string>
+    <!-- transactions -->
+    <string name="selectCategory">Select Category</string>
+    <string name="selectSubcategory">Select Subcategory</string>
+    <string name="selectAccount">Select Account</string>
 </resources>

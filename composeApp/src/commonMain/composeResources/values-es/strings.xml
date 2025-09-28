@@ -79,5 +79,20 @@
     <string name="subcategoryCreated">Subcategoría creada con exito</string>
     <string name="subcategoryUpdated">Subcategoría actualizada con exito</string>
     <string name="subcategoryDeleted">Subcategoría eliminada con exito</string>
-
+    <string name="selectIcon">Seleccionar ícono</string>
+    <string name="celebration">Celebración</string>
+    <string name="food">Comida</string>
+    <string name="transport">Transporte</string>
+    <string name="entertainment">Entretenimiento</string>
+    <string name="health">Salud</string>
+    <string name="shopping">Compras</string>
+    <string name="travel">Viaje</string>
+    <string name="technology">Tecnología</string>
+    <string name="service">Servicio</string>
+    <string name="education">Educación</string>
+    <string name="other">Otro</string>
+    <!-- transactions -->
+    <string name="selectCategory">Seleccionar categoría</string>
+    <string name="selectSubcategory">Seleccionar subcategoría</string>
+    <string name="selectAccount">Seleccionar cuenta</string>
 </resources>
