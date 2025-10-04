@@ -92,6 +92,7 @@
     <string name="education">Education</string>
     <string name="other">Other</string>
     <!-- transactions -->
+    <string name="transaction">Transaction</string>
     <string name="selectCategory">Select Category</string>
     <string name="selectSubcategory">Select Subcategory</string>
     <string name="selectAccount">Select Account</string>

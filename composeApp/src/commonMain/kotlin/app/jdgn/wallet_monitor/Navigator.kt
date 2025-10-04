@@ -16,6 +16,7 @@ import app.jdgn.wallet_monitor.ui.screens.CategoryScreen
 import app.jdgn.wallet_monitor.ui.screens.HomeScreen
 import app.jdgn.wallet_monitor.ui.screens.InitialConfigScreen
 import app.jdgn.wallet_monitor.ui.screens.SplashScreen
+import app.jdgn.wallet_monitor.ui.screens.TransactionScreen
 import app.jdgn.wallet_monitor.ui.screens.WelcomeScreen
 import app.jdgn.wallet_monitor.utils.AppConstants
 
@@ -30,6 +31,7 @@ object Routes {
     const val BANK = "bank/{id}"
     const val CATEGORIES = "categories"
     const val CATEGORY = "category/{id}"
+    const val TRANSACTION = "transaction/{id}"
 }
 
 @Composable
@@ -97,6 +99,20 @@ fun Navigation(modifier:Modifier = Modifier) {
         ) { backStackEntry ->
             val id = backStackEntry.getArgumentString("id")?.toLongOrNull()
             CategoryScreen(navController, id)
+        }
+
+        composable(
+            route = Routes.TRANSACTION,
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) { backStackEntry ->
+            val id = backStackEntry.getArgumentString("id")?.toLongOrNull()
+            TransactionScreen(navController, id)
         }
     }
 }
