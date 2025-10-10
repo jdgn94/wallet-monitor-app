@@ -20,25 +20,40 @@ class SubcategoryViewModel(
         return result
     }
 
-    fun create(
+    fun createOrUpdate(
+        id: Long,
         categoryId: Long,
         name: String,
-        icon: String,
+        icon: String?,
         color: String,
     ) {
-        subcategoryQueries.insert(
+        if (id < 0)
+            create(categoryId, name, icon, color)
+        else
+            update(id, categoryId, name, icon, color)
+    }
+
+    private fun create(
+        categoryId: Long,
+        name: String,
+        icon: String?,
+        color: String,
+    ): Long {
+        val res = subcategoryQueries.insert(
             categoryId = categoryId,
             name = name,
             icon = icon,
             color = color
         )
+
+        return res.value
     }
 
-    fun update(
+    private fun update(
         id: Long,
         categoryId: Long,
         name: String,
-        icon: String,
+        icon: String?,
         color: String,
     ) {
         subcategoryQueries.update(

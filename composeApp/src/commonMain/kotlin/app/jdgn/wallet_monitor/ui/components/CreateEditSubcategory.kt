@@ -60,6 +60,10 @@ fun CreateEditSubcategory(
         onDismissRequest()
     }
 
+    fun selectIcon(value: String) {
+        icon.value = value
+    }
+
     DialogBasic(
         open = open,
         onDismissRequest = onDismissRequest,
@@ -69,7 +73,11 @@ fun CreateEditSubcategory(
         title = Res.string.subcategory,
     ) {
         Row(modifier = Modifier.widthIn(max = 400.dp).padding(bottom = 8.dp)) {
-            IconSelector(color = localColor.value)
+            IconSelector(
+                color = localColor.value,
+                onChangeValue = { selectIcon(it) },
+                defaultSelected = icon.value,
+            )
             CustomTextField(
                 margin = PaddingValues(start = 8.dp),
                 value = name.value,

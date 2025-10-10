@@ -39,6 +39,7 @@ import app.jdgn.wallet_monitor.ui.components.basic.IconSelector
 import app.jdgn.wallet_monitor.ui.components.basic.TopBar
 import app.jdgn.wallet_monitor.ui.components.composed.ActionButtonComponent
 import app.jdgn.wallet_monitor.ui.components.composed.SubcategoryItemComponent
+import app.jdgn.wallet_monitor.utils.colorToHex
 import app.jdgn.wallet_monitor.utils.generateRandomColorHex
 import app.jdgn.wallet_monitor.utils.hexStringToColor
 import app.wallet_monitor.shared.viewModel.CategoryViewModel
@@ -69,6 +70,10 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
     val dialogSubcategory = remember { mutableStateOf(false) }
     val subcategorySelected = remember { mutableStateOf<Subcategories?>(null) }
 
+    fun selectIcon(value: String) {
+        icon.value = value
+    }
+
     fun changeName(value: String) {
         name.value = value
     }
@@ -98,7 +103,16 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
         }
     }
 
-    fun save() {}
+    fun save() {
+        viewModelCategory.createOrUpdate(
+            categoryId.value,
+            name.value,
+            description.value,
+            icon.value,
+            colorToHex(color.value),
+            subcategories.value
+        )
+    }
 
     fun delete() {}
 
@@ -127,7 +141,9 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
             ) {
                 IconSelector(
-                    color = color.value
+                    color = color.value,
+                    defaultSelected = icon.value,
+                    onChangeValue = { selectIcon(it) },
                 )
                 Box(modifier = Modifier.width(16.dp))
                 CustomTextField(

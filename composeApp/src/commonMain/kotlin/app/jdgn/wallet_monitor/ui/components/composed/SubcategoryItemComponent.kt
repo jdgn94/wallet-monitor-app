@@ -1,5 +1,6 @@
 package app.jdgn.wallet_monitor.ui.components.composed
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,6 +21,7 @@ import app.jdgn.wallet_monitor.ui.LocalResource
 import app.jdgn.wallet_monitor.ui.components.basic.CustomBox
 import app.walletmonitor.db.v0.Subcategories
 import app.jdgn.wallet_monitor.utils.hexStringToColor
+import app.jdgn.wallet_monitor.utils.imageByString
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -51,16 +53,16 @@ fun SubcategoryItemComponent(
         contentAlignment = Alignment.CenterStart,
         onClick = onClick,
     ) {
-        Icon(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .size(60.dp)
-                .rotate(20f)
-                .alpha(0.35f),
-            painter = painterResource(LocalResource.Icons.Outlined.bank),
-            contentDescription = subcategory.name,
-            tint = color,
-        )
+        if (subcategory.icon != null && subcategory.icon != "")
+            Image(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .size(60.dp)
+                    .rotate(20f)
+                    .alpha(0.35f),
+                painter = painterResource(imageByString(subcategory.icon!!)),
+                contentDescription = subcategory.name,
+            )
         Text(
             modifier = Modifier.padding(16.dp),
             text = subcategory.name,

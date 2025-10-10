@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -48,16 +49,23 @@ import walletmonitor.composeapp.generated.resources.travel
 @Preview
 @Composable
 fun IconSelector(
-    // defaultSelected: String,
-    // onChangeValue: (String) -> Unit
+    defaultSelected: String? = null,
+    onChangeValue: (String) -> Unit,
     color: Color = MaterialTheme.colorScheme.primary
 ) {
     val open = remember { mutableStateOf(false) }
     val iconSelected = remember { mutableStateOf("") }
 
+    LaunchedEffect(open) {
+        if (iconSelected.value.isEmpty()) {
+            iconSelected.value = defaultSelected ?: ""
+        }
+    }
+
     fun selectIcon(name: String) {
         iconSelected.value = name
         open.value = false
+        onChangeValue(name)
     }
 
     CustomBox(

@@ -8,6 +8,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -84,6 +85,9 @@ fun CategoriesScreen(navController: NavHostController) {
                     type = MessageType.WARNING
                 )
                 HorizontalDivider(color = Color.Transparent)
+            }
+            allCategories.value.map { category ->
+                Text(category.name)
             }
         }
     }
