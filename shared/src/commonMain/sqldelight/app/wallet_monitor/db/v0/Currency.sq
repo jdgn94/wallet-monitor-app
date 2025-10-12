@@ -98,4 +98,5 @@ FROM
 WHERE
     (LOWER(name) LIKE ? OR LOWER(symbol) LIKE ? OR LOWER(code) LIKE ? OR LOWER(symbolNative) LIKE ?)
     AND currencyTypeId IN (?)
-LIMIT ? OFFSET ?;
+LIMIT ?
+OFFSET ?;

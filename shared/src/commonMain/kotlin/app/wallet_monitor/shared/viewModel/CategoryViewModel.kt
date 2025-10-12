@@ -10,6 +10,16 @@ class CategoryViewModel(
     private val categoryQueries: CategoryQueries,
     private val subcategoryQueries: SubcategoryQueries
 ): ViewModel() {
+    fun getAll(): List<Categories> {
+        val result = categoryQueries.getAll().executeAsList()
+
+        return result
+    }
+
+    fun getOne(id: Long): Categories? {
+        return categoryQueries.getOne(id).executeAsOneOrNull()
+    }
+
     fun getAllPaginate(name: String, page: Int, pageSize: Int = 20): List<Categories> {
         val result = categoryQueries.getAllPaginate(
             value_ ="%$name%",

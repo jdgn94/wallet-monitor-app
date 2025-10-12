@@ -1,6 +1,7 @@
 package app.jdgn.wallet_monitor.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,6 +26,7 @@ import app.jdgn.wallet_monitor.ui.components.basic.CustomColumn
 import app.jdgn.wallet_monitor.ui.components.basic.CustomMessage
 import app.jdgn.wallet_monitor.ui.components.basic.MessageType
 import app.jdgn.wallet_monitor.ui.components.basic.TopBar
+import app.jdgn.wallet_monitor.ui.components.composed.CategoryComponent
 import app.wallet_monitor.shared.viewModel.CategoryViewModel
 import app.walletmonitor.db.v0.Categories
 import org.jetbrains.compose.resources.painterResource
@@ -45,7 +47,9 @@ fun CategoriesScreen(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     LaunchedEffect(navBackStackEntry) {
-        allCategories.value = viewModelCategories.getAllPaginate("", page.value)
+        allCategories.value = viewModelCategories.getAll()
+//        allCategories.value = viewModelCategories.getAllPaginate("", page.value)
+        println("Busqueda de todas categorias, cantidad ${allCategories.value.count()}")
     }
 
     fun navigateTo(route: String) {
@@ -86,8 +90,14 @@ fun CategoriesScreen(navController: NavHostController) {
                 )
                 HorizontalDivider(color = Color.Transparent)
             }
-            allCategories.value.map { category ->
-                Text(category.name)
+            FlowRow(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                allCategories.value.map { category ->
+                    CategoryComponent(navController, category)
+                }
             }
         }
     }

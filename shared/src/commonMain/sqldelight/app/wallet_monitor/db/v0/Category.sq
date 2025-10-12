@@ -8,6 +8,13 @@ CREATE TABLE categories (
     updatedAt TEXT NOT NULL
 );
 
+getAll:
+SELECT
+    *
+FROM
+    categories
+ORDER BY name ASC;
+
 getAllPaginate:
 SELECT
     *
@@ -15,9 +22,7 @@ FROM
     categories
 WHERE
     LOWER(name) LIKE ?
-ORDER BY name ASC
-LIMIT ?
-OFFSET ?;
+LIMIT ? OFFSET ?;
 
 insert:
 INSERT INTO
@@ -34,5 +39,13 @@ SET
     icon = ?,
     color = ?,
     updatedAt = strftime('%s', 'now')
+WHERE
+    id = ?;
+
+getOne:
+SELECT
+    *
+FROM
+    categories
 WHERE
     id = ?;

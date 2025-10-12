@@ -60,7 +60,6 @@ import walletmonitor.composeapp.generated.resources.subcategories
 @Composable
 fun CategoryScreen(navController: NavHostController, id: Long? = null) {
     val viewModelCategory = koinViewModel<CategoryViewModel>()
-    val viewModelSubcategory = koinViewModel<SubcategoryViewModel>()
     val categoryId = remember { mutableStateOf(id ?: 0L) }
     val icon = remember { mutableStateOf("") }
     val name = remember { mutableStateOf("") }
@@ -69,6 +68,18 @@ fun CategoryScreen(navController: NavHostController, id: Long? = null) {
     val subcategories = remember { mutableStateOf<List<Subcategories>>(listOf()) }
     val dialogSubcategory = remember { mutableStateOf(false) }
     val subcategorySelected = remember { mutableStateOf<Subcategories?>(null) }
+
+    LaunchedEffect(true) {
+        if (id != 0L) {
+            val category = viewModelCategory.getOne(id as Long)
+            if (category != null) {
+                icon.value = category.icon
+                name.value = category.name
+                description.value = category.description ?: ""
+                color.value = hexStringToColor(category.color)
+            }
+        }
+    }
 
     fun selectIcon(value: String) {
         icon.value = value

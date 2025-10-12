@@ -56,10 +56,8 @@ fun IconSelector(
     val open = remember { mutableStateOf(false) }
     val iconSelected = remember { mutableStateOf("") }
 
-    LaunchedEffect(open) {
-        if (iconSelected.value.isEmpty()) {
-            iconSelected.value = defaultSelected ?: ""
-        }
+    LaunchedEffect(defaultSelected) {
+        iconSelected.value = defaultSelected ?: ""
     }
 
     fun selectIcon(name: String) {
